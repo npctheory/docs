@@ -1,5 +1,5 @@
 ---
-title: Dinner
+title: Amichai
 layout: page
 ---
 
@@ -29,9 +29,9 @@ layout: page
 | Infrastructure | Infrastructure |||
 | Application | Application |||
 
-{% include_relative dinner/1.md %}
-{% include_relative dinner/2.md %}
-{% include_relative dinner/3.md %}
+{% include_relative _includes/1.md %}
+{% include_relative _includes/2.md %}
+{% include_relative _includes/code.md %}
   
 ## Тесты
   
