@@ -1,7 +1,7 @@
 ## Добавить в PATH:  
 **csc.exe**: `C:\Windows\Microsoft.NET\Framework64\v4.0.30319`  
 (Из этой директории компилятор достает MSCorLib.dll)  
-**ildasm**: `C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools`  
+**ildasm, gacutil**: `C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools`  
 
 ## Скомпилировать один Program.cs в .exe
 (Building Types into a Module)  
@@ -37,3 +37,7 @@ NGen.exe can perform better optimizations when processing larger files.
 ## Скомпилировать один Program.cs в .dll
 В папке с FUT.cs и RUT.cs
 `csc /out:MultiFileLibrary.dll /t:library /addmodule:RUT.netmodule FUT.cs`
+
+## Strongly named & weakly named assemblies
+
+## Public Assembly Key
