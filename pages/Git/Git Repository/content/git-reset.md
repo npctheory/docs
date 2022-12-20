@@ -1,13 +1,13 @@
----
-title: git-reset
-layout: page
-grand_parent: Git
-parent: Git Repository
-nav_order: 103
----
+## Git Reset \-\-soft
+Двигает текущую вершину бранчи + двигает HEAD в указанный коммит  
+`git reset --soft 9e5e` Подвинуть вершину бранчи и вместе с ней HEAD, в коммит 9e5e  
+`git reset --soft HEAD~` Подвинуть вершину бранчи и вместе с ней HEAD на один коммит назад
+
+## Git Reset \[\-\-mixed\] (по умолчанию)
+То же что \-\-soft, и изменяет текущий коммит/Index, записывая в него то, что было в указанном коммите  
+`git reset 9e5e` Подвинуть вершину бранчи, HEAD, изменить Index на коммит 9e5e  
+`git reset 9e5e --mixed` -||-  
+`git reset HEAD` Откатить индекс до состояние прошлого коммита. Использовать после `git add .` чтобы отменить лишнее проиндексированное  
+`git reset HEAD .idea`  Убрать из staginng файлы .idea  
 
 `git reset --hard`  
-`git reset --soft`  
-`git reset --mixed`  
-`git reset HEAD`  Убрать из stagin
-`git reset HEAD .idea`  Убрать из staginng файлы .idea  
