@@ -1,2 +1,2 @@
 ## Git Status
-`git status`
+`git status` Показать все untracked
