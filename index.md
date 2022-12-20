@@ -4,4 +4,4 @@
 
 layout: home
 ---
-Страница home
+Страница index в корне
