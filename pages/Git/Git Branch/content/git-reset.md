@@ -10,4 +10,5 @@
 `git reset HEAD` Откатить индекс до состояние прошлого коммита. Использовать после `git add .` чтобы отменить лишнее проиндексированное  
 `git reset HEAD .idea`  Убрать из staginng файлы .idea  
 
-`git reset --hard`  
+## Git Reset \-\-hard
+  
