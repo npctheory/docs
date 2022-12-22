@@ -7,12 +7,13 @@
 `git commit -a` Добавить в индекс все tracked файлы  
 `git commit -a -m 'Text'` то же, добавить в индес все modified и закоммитить.  
 `git commit -am 'Text'` -||-
-## Алиас для честного Git Add . вместе с Git Commit
-`git config --global alias.commitall '!git add .;git commit'`
-`git config --global alias.commitall '!git add -A;git commit'`
-Вызовы будут выглядеть `git commitall -m 'Text'`
-
-
-
-
-`git commit --ammend` = `git reset --soft` + `git commit` 
+<details>
+<summary>Алиас для честного Git Add . вместе с Git Commit</summary>
+<code>
+git config --global alias.commitall '!git add .;git commit'  
+<br>
+git config --global alias.commitall '!git add -A;git commit' 
+</code><br>  
+Вызовы будут выглядеть:<br>
+<code>git commitall -m 'Text'</code>
+</details>
