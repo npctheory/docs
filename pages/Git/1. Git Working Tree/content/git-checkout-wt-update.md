@@ -4,10 +4,11 @@
  `git reset -- <treeish>` Сбрасывает состояние файла в индексе до состояние в HEAD.  
 
 ## Откат всей WT через Git Checkout \<branch\>. Перемещает HEAD  
+`git checkout -f` Отменить все изменения WT, отменить весь текущий коммит. untracked не трогает.  
+`git checkout -f HEAD` То же самое.   
+
 `git checkout master` Обновить WT до состояние ласт-коммита master. Поставить HEAD на master.  
 `git checkout --force master` Игнорировать изменения в текущей WT, обновить WT до состояния ласт-коммита master. Поставить HEAD на master.  
-`git checkout -f HEAD` Отменить все изменения WT, до состояние коммита master.  Используется, чтобы отменить всё, что было сделано для текущего коммита.    
-`git checkout -f` Отменить все изменения WT, откатить её до HEAD.(HEAD это значение по умолчанию).
 
 ## Откат отдельных файлов до состояния коммита через Git Checkout
 `git checkout 54a4 -- index.html` Откатить index.html до 54a4 + Добавить новую версию в индекс. То же что git checkout 54a4 index.html  
