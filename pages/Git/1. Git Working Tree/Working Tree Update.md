@@ -2,7 +2,7 @@
 title: Working Tree Update
 layout: page
 parent: Git
-nav_order: 1
+nav_order: 101
 ---
 {% include_relative content/git-checkout-wt-update.md %} 
 {% include_relative content/git-rm.md %}  
