@@ -6,6 +6,7 @@ nav_exclude: false
 
 ---
 Как поставить tree? `tree -a` лучше чем ls
+Пересмотреть 5.1-5.5 (git reset)  
 
 ## Примеры коммит-мессаджей
 - [Примеры Commit Message разработчиков Git](https://github.com/git/git/commits)  

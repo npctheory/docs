@@ -17,3 +17,8 @@ git config --global alias.commitall '!git add -A;git commit'
 Вызовы будут выглядеть:<br>
 <code>git commitall -m 'Text'</code>
 </details>
+
+## Git Commit \-\-amend Отмена одного последнего коммита
+`git commit --amend` branchhead и HEAD вернутся на один коммит назад, и граф будет продолжаться оттуда. Первоначальный коммит будет в анонимной ветке.  
+Эквивалентно `git reset --soft @~`;`git commit`  
+Так же используется для изменения описания последнего коммита, без изменений в файлах.  
