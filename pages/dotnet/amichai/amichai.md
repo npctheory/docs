@@ -1,6 +1,7 @@
 ---
 title: Amichai
 layout: page
+nav_exclude: true
 
 heading_anchors: true
 ---

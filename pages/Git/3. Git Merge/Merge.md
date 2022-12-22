@@ -1,5 +1,5 @@
 ---
-title: Git Merge
+title: Merge
 layout: page
 parent: Git
 nav_order: 301

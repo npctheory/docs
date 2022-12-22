@@ -11,4 +11,6 @@
 `git reset HEAD .idea`  Убрать из staginng файлы .idea  
 
 ## Git Reset \-\-hard
-  
+`git reset --hard 2fad` Отменить всё сделанное после коммита 2fad - вернуть текущую ветку\[master\] и HEAD вместе с ней на 2fad. Если запомнить номер коммита (найти через `cat .git/ORIG_HEAD` или в `git reflog`) можно вернуть master и HEAD обратно так же чере `git reset --hard`.  
+
+`git reset --hard HEAD`
