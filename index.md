@@ -4,4 +4,7 @@
 
 layout: home
 ---
-Страница index в корне
+Как поставить tree? `tree -a` лучше чем ls  
+Пересмотреть 5.1-5.5 (git reset)  
+Что такое git commit \-v  
+`git config --global commit.verbose true`  
