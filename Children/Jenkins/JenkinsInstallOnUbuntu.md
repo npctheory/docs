@@ -5,7 +5,7 @@ parent: Jenkins
 nav_order: 1
 pqip: "45.89.52.66"
 ---
-[Прямая ссылка на https://{{ page.pqip }}:8080](http://{{ page.pqip }}:8888)  
+[Прямая ссылка на http://{{ page.pqip }}:8080/login](http://{{ page.pqip }}:8080/login)  
 
 [Инструкция DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-20-04)  
 [Инструкция с оф сайта Jenkins](https://pkg.jenkins.io/debian-stable/)
@@ -14,7 +14,7 @@ pqip: "45.89.52.66"
 
 `java -version` версия Java. Должна быть 11 ?
 
-`sudo lsof -i:8080` занят ли порт 8080. Должен быть свободен.
+`sudo lsof -i:8080` занят ли порт 8080. Должен быть свободен. `apt remove apache2` если там апач    
 
 `grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/*` Показать sources.list . Репозиторий уже мог быть добавлен. [More](https://askubuntu.com/questions/148932/how-can-i-get-a-list-of-all-repositories-and-ppas-from-the-command-line-into-an)  
 
@@ -47,9 +47,6 @@ pqip: "45.89.52.66"
 `sudo apt install jenkins`  
 
 ### UFW
-`systemctl edit jenkins` добавить `[Service] Environment="JENKINS_PORT=8888"`  
-`sudo nano /etc/default/jenkins` Здесь настройки порта менять не получится.
-
 Проверить, запущен ли UFW  
 `sudo ufw status`  
 <details>
@@ -69,13 +66,21 @@ OpenSSH (v6)               ALLOW       Anywhere (v6)</pre>
 `sudo ufw allow OpenSSH`  
 `sudo ufw enable`  
 
-
-`sudo service jenkins status` должно быть active(running)  
-`sudo systemctl status jenkins` должно быть active(running)  
-`curl localhost:8080` должно работать  
-`netstat -ntulp | grep 8080`  
-
-
 `sudo service jenkins start` Запуск  
 `sudo service jenkins stop` Остановить  
+`sudo service jenkins status` Статус. должно быть active(running)  
+`sudo systemctl status jenkins.service` Статус. должно быть active(running)  
 
+`curl localhost:8080` должно работать  
+`netstat -ntulp | grep 8080`  
+`sudo lsof -i:8080` Кто слушает порт 8080  
+
+### Первый запуск
+[Прямая ссылка на http://{{ page.pqip }}:8080/login](http://{{ page.pqip }}:8080/login)  
+`cat /var/lib/jenkins/secrets/initialAdminPassword`  выставить.
+Установить Suggested.  
+
+### Настройка языка
+[Плагин Locale](https://plugins.jenkins.io/locale/)  
+Dashboard->Настроить Jenkins->Конфигурация системы->Ctrl+F "Locale"
+Default Language: `en`  

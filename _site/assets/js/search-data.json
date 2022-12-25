@@ -35,311 +35,311 @@
     "url": "/2.%20Docker.html",
     "relUrl": "/2.%20Docker.html"
   },"6": {
-    "doc": "Conainerization",
-    "title": "Conainerization",
-    "content": " ",
-    "url": "/201.%20Containerization.html",
-    "relUrl": "/201.%20Containerization.html"
-  },"7": {
     "doc": "Jenkins",
     "title": "Jenkins",
-    "content": "Альтернативы Jenkins Bamboo, CircleCi, Gitlab CICD, Jetbrains Teamcity, Travis . ",
+    "content": "Прямая ссылка на http://45.89.52.66:8080/login . sudo service jenkins start Запуск sudo service jenkins restart Перезапустить sudo service jenkins stop Остановить . sudo service jenkins status Статус. должно быть active(running) sudo systemctl status jenkins.service Статус. должно быть active(running) . Поменять порт с 8080 на другой systemctl edit jenkins Добавить [Service] Environment=\"JENKINS_PORT=8081\" . sudo nano /etc/default/jenkins Здесь настройки порта менять не получится. Альтернативы Jenkins Bamboo, CircleCi, Gitlab CICD, Jetbrains Teamcity, Travis . ",
     "url": "/3.%20Jenkins.html",
     "relUrl": "/3.%20Jenkins.html"
-  },"8": {
-    "doc": "CI/CD",
-    "title": "CI/CD",
-    "content": " ",
-    "url": "/301.%20CICD.html",
-    "relUrl": "/301.%20CICD.html"
-  },"9": {
+  },"7": {
     "doc": "Ubuntu",
     "title": "Ubuntu",
     "content": "clear очистить экран cat /etc/os-release версия ОС sudo ufw reset никогда не нажимать . ",
     "url": "/4.%20Ubuntu.html",
     "relUrl": "/4.%20Ubuntu.html"
-  },"10": {
-    "doc": "NoSql",
-    "title": "NoSql",
-    "content": " ",
-    "url": "/401.%20NoSQL.html",
-    "relUrl": "/401.%20NoSQL.html"
-  },"11": {
+  },"8": {
     "doc": "Markdown",
     "title": "Markdown",
     "content": " ",
     "url": "/5.%20Markdown.html",
     "relUrl": "/5.%20Markdown.html"
-  },"12": {
+  },"9": {
     "doc": "VS Code",
     "title": "VS Code",
     "content": " ",
     "url": "/6.%20VSCode.html",
     "relUrl": "/6.%20VSCode.html"
-  },"13": {
+  },"10": {
     "doc": "Branch Create",
     "title": "Git Branch",
     "content": "git branch feature Создать на последнем коммите вершину feature git branch --force feature 54a4 Создать или подвинуть если уже есть вершину feature на коммит 54a4. git branch feature HEAD@{6} создать вершину feature на шестом положении HEAD из рефлога git branch feature HEAD@{'2017-09-12 22:49:07 +0200'} восстановить вершину feature на состояние HEAD из даты . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#git-branch",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#git-branch"
-  },"14": {
+  },"11": {
     "doc": "Branch Create",
     "title": "Git Checkout",
     "content": "git checkout -b fix создает вершину fix, а если такая уже есть, ошибка? Двигает HEAD на fix. git checkout -B feature 54a4 новая ветка feature создается на 54a4 Эта команда делает то же, что . git branch -f feature (создать вершину master на коммите, на котором стоит вершина, на которой стоит HEAD) и git checkout feature переместить HEAD на feature . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#git-checkout",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#git-checkout"
-  },"15": {
+  },"12": {
     "doc": "Branch Create",
     "title": "Создать ветку для промежуточного результата",
     "content": "git checkout -b fix git commit -m \"Промежуточный результат\" git checkout master . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D0%BC%D0%B5%D0%B6%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D0%B3%D0%BE-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B0",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#создать-ветку-для-промежуточного-результата"
-  },"16": {
+  },"13": {
     "doc": "Branch Create",
     "title": "Подвинуть вершину master на несколько коммитов назад, а текущую ветку оставить под названием fix",
     "content": "git branch fix git branch --f master 54a4 Всё, что осталось выше 54a4 теперь в ветке fix или . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#%D0%BF%D0%BE%D0%B4%D0%B2%D0%B8%D0%BD%D1%83%D1%82%D1%8C-%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BD%D1%83-master-%D0%BD%D0%B0-%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0%D0%B7%D0%B0%D0%B4-%D0%B0-%D1%82%D0%B5%D0%BA%D1%83%D1%89%D1%83%D1%8E-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BF%D0%BE%D0%B4-%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC-fix",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Create.html#подвинуть-вершину-master-на-несколько-коммитов-назад-а-текущую-ветку-оставить-под-названием-fix"
-  },"17": {
+  },"14": {
     "doc": "Branch Create",
     "title": "Branch Create",
     "content": "Первая ветка master создается первым git commit после git init Дальше ветки создаются командой git branch или git checkout -b . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Create.html",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Create.html"
-  },"18": {
+  },"15": {
     "doc": "Branch Update and Delete",
     "title": "Удаление ветки",
     "content": "git branch -d fix Удалить ветку fix Сработает только если ветка посередине графа git branch -D fix игнорирует положение вершины . git reset для того чтобы, не трогая WT, откатывать индекс + двигать ветку+HEAD . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D1%82%D0%BA%D0%B8",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#удаление-ветки"
-  },"19": {
+  },"16": {
     "doc": "Branch Update and Delete",
     "title": "Git Reset --soft &lt;commit&gt;",
     "content": "Двигает вершину бранчи, и вместе с ней HEAD. WT + Индекс не остаются как были. Используется для того чтобы упаковать несколько предыдущих коммитов в один новый. git reset --soft 9e5e Подвинуть вершину бранчи и вместе с ней HEAD, в коммит 9e5e git reset --soft HEAD~ Подвинуть вершину бранчи и вместе с ней HEAD на один коммит назад . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---soft-commit",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---soft-commit"
-  },"20": {
+  },"17": {
     "doc": "Branch Update and Delete",
     "title": "Git Reset [--mixed] &lt;commit&gt; (по умолчанию)",
     "content": "То же что --soft, но сбрасыва индекс текущего коммита git reset 9e5e Подвинуть вершину бранчи, HEAD, изменить Index на коммит 9e5e git reset 9e5e --mixed -||- git reset HEAD Откатить индекс до состояние прошлого коммита. Использовать после git add . чтобы отменить лишнее проиндексированное git reset HEAD .idea Убрать из staginng файлы .idea . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---mixed-commit-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---mixed-commit-по-умолчанию"
-  },"21": {
+  },"18": {
     "doc": "Branch Update and Delete",
     "title": "Git Reset --hard &lt;commit&gt;",
     "content": "git reset --hard 2fad Для того, чтоб отменить вообще всё сделанное после коммита 2fad - вернуть текущую вершину[master] и HEAD вместе с ней на коммит 2fad. Коммиты, оставшиеся выше, останутся в анонимной ветке. Если запомнить номер коммита (найти через cat .git/ORIG_HEAD или в git reflog) можно вернуть master и HEAD обратно так же чере git reset --hard. git reset --hard HEAD . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---hard-commit",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---hard-commit"
-  },"22": {
+  },"19": {
     "doc": "Branch Update and Delete",
     "title": "Branch Update and Delete",
     "content": "Git Branch не умеет переносить ветку, на которой мы сейчас находимся . Reset Demystified . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20Update%20Delete.html"
-  },"23": {
+  },"20": {
     "doc": "Branch and Head Log",
     "title": "Git Branch [--list]",
     "content": "git branch Вывести список всех вершин веток. Делает то же что git branch --list . git branch -v Вывести список вершин веток с номерами коммитов, на которых они стоят . cat .git/refs/heads/master Показать номер коммита, на котором вершина master . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-branch---list",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-branch---list"
-  },"24": {
+  },"21": {
     "doc": "Branch and Head Log",
     "title": "Git RefLog",
     "content": "git reflog master Вывести историю движения вершины master git reflog --date=iso . Время жизни логов . gc.reflogExpire gc.reflogExpireUnreachable . ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-reflog",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-reflog"
-  },"25": {
+  },"22": {
     "doc": "Branch and Head Log",
     "title": "Branch and Head Log",
     "content": " ",
     "url": "/children/Git/4.%20Git%20Branch/Branch%20and%20Head%20Log.html",
     "relUrl": "/children/Git/4.%20Git%20Branch/Branch%20and%20Head%20Log.html"
-  },"26": {
+  },"23": {
     "doc": "Commit Create",
     "title": "Git Status",
     "content": "Показывает изменения Index vs Last Commit git status Показать все modified/untracked по отношению к предыдущему коммиту . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-status",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-status"
-  },"27": {
+  },"24": {
     "doc": "Commit Create",
     "title": "Git Add",
     "content": "git add . Добавить все untracked файлы в текущий коммит git add -A То же, но для тех ОС, где нет оператора точки git add src Добавить папку в текущий коммит git add index.md Добавить index.md в текущий коммит git add -p index.html index.md index.php git будет спрашивать что делать с каждым измененным файлом . Добавить файлы, которые под .gitignore: git add --force, git add -f . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-add",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-add"
-  },"28": {
+  },"25": {
     "doc": "Commit Create",
     "title": "Git Commit",
     "content": "git commit Отправить в репозиторий текущий коммит git commit --author='John Smith' &lt;john@me.com&gt; --date='...' Задать автора, дату git commit -m \"Text\" Закоммитить с сообщением “Text” . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commit",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commit"
-  },"29": {
+  },"26": {
     "doc": "Commit Create",
     "title": "Git Commit+Add",
     "content": "git commit -m 'Text' index.md Добавить изменения файла index.md в индекс, закоммитить с текстом Text. Работает только для tracked файлов. git commit -a Добавить в индекс все tracked файлы git commit -a -m 'Text' то же, добавить в индес все modified и закоммитить. git commit -am 'Text' -||- . Алиас для честного Git Add . вместе с Git Commit git config --global alias.commitall '!git add .;git commit' git config --global alias.commitall '!git add -A;git commit' Вызовы будут выглядеть: git commitall -m 'Text' ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commitadd",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commitadd"
-  },"30": {
+  },"27": {
     "doc": "Commit Create",
     "title": "Git Commit --amend Отмена одного последнего коммита",
     "content": "git commit --amend branchhead и HEAD вернутся на один коммит назад, и граф будет продолжаться оттуда. Первоначальный коммит будет в анонимной ветке. Эквивалентно git reset --soft @~;git commit Так же используется для изменения описания последнего коммита, без изменений в файлах. ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commit---amend-%D0%BE%D1%82%D0%BC%D0%B5%D0%BD%D0%B0-%D0%BE%D0%B4%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%B0",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commit---amend-отмена-одного-последнего-коммита"
-  },"31": {
+  },"28": {
     "doc": "Commit Create",
     "title": "Git Commit -v",
     "content": " ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commit--v",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-commit--v"
-  },"32": {
+  },"29": {
     "doc": "Commit Create",
     "title": "Git Reset &lt;pathspec&gt;",
     "content": "git reset HEAD сбросить весь индекс текущего коммита git reset index.html удалить из индекс то, что было сделано git add index.html . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-reset-pathspec",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html#git-reset-pathspec"
-  },"33": {
+  },"30": {
     "doc": "Commit Create",
     "title": "Commit Create",
     "content": " ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Create.html",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Create.html"
-  },"34": {
+  },"31": {
     "doc": "Commit List",
     "title": "Git Reflog Show",
     "content": "git log --oneline -g показывает движения веток и HEAD он же git reflog show . Git blame . git blame index.html -L 5,8 . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20List.html#git-reflog-show",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20List.html#git-reflog-show"
-  },"35": {
+  },"32": {
     "doc": "Commit List",
     "title": "Commit List",
     "content": "6.3 вывод всего графа . Git Log: вывод списка коммитов . git log Показать все коммиты от HEAD вниз git log master Показать все коммиты от вершины master вниз git log --oneline номер, ветка, заголовок git log --follow index.html все коммиты, где менялся index.html git log --no-decorate Не показывать бранчхеды и HEAD git log --pretty=format:'%h %cd | %s%d [%an]' &lt;id коммита&gt; &lt;дата&gt; | &lt;заголовок&gt; &lt;декорирование(ссылки)&gt; [имя автора] . git log --pretty=format:'%C(yellow)%h %C(dim green)%ad %C(reset)| %C(cyan)%s%d %C(#667788)[%an]' --date=format:'%F %R' . Алиасы Алиас git lg git config --global alias.lg 'log --pretty=format:'%C(yellow)%h %C(dim green)%ad %C(reset)| %C(cyan)%s%d %C(#667788)[%an]' --date=format:'%F %R' Список коммитов от корня до коммита или бранчхеда: Git Log &lt;commit&gt; . git log master вывести все коммиты от корня до бранчхеда мастер git log master feature вывести все коммиты от корня до бранчхедов feautre и master . Список коммитов с regex-фильтром: Git Log –grep . Поиск по мессаджу git log --grep добавил найти слово коммиты со словом ‘добавил’ git log --grep добавил -i отключить регистрозависимость git log --grep добавил --grep удалил найти коммиты, где в мессадже есть или слово ‘добавил’ или слово ‘удалил’ git log --grep добавил --grep удалил --all-match найти коммиты, которые матчатся с обоими выражениями . Поиск по изменениям в файлах git log -G\"регулярноевыражения\" -p документация git log -L . git config --global grep.patternType perl Включить перловые regex . История изменений внутри файла между строчками regex1 и regex2: Git Log -L . git log -L '/&lt;head&gt;/','&lt;\\/head&gt;/':index.html история изменений внутри тега head в index.html . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20List.html",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20List.html"
-  },"36": {
+  },"33": {
     "doc": "Commit Read",
     "title": "Git Show",
     "content": "Показать всё, что изменил коммит Git Show &lt;коммит&gt; . Показывает изменения, сделанные коммитом git show Показать изменения, сделанные коммитом из HEAD git show 54a4 Показывать изменения, сделанные коммитом 54a4. git show --pretty=fuller . git show HEAD~ Показать все изменения сделанные родителем коммита HEAD То же что HEAD~1 то же что @~1 git show @~2 -- index.html Показать изменения в файле index.html в прародителе HEAD если были git show @~2:index.html Показать состояние index.html в прародителе HEAD . Показать состояние файла в коммите Git Show :&lt;файл&gt; . git show :index.html Показать состояние index.html в индексе текущего коммита . git show :\"текст\" Найти коммит по тексту “текст” коммита git show 68bd Показать коммит 68bd должно быть минимум четыре цифры . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-show",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-show"
-  },"37": {
+  },"34": {
     "doc": "Commit Read",
     "title": "Git Ls-Files",
     "content": "Делает то же что и ls, но позволяет фильтровать git ls-files – :!:*.md Показать все файлы без .md . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-ls-files",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-ls-files"
-  },"38": {
+  },"35": {
     "doc": "Commit Read",
     "title": "Git Diff &lt;commit1&gt; &lt;commit2&gt;",
     "content": "git diff master..feature То же что и пробел. Дифф между коммитами, на которых стоят бранчхеды. git diff master...feature Дифф feature с последним общим коммитом веток git diff e2e4 e4e2 Дифф e4e2 с e2e4 git diff e2e4 Сравнить WT с коммитом e2e4 git diff HEAD Как git status, только для содержимого файлов git diff -- index.html Сравнить версию из working directory с последним коммитом . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1-commit2",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1-commit2"
-  },"39": {
+  },"36": {
     "doc": "Commit Read",
     "title": "Git Diff --cached",
     "content": "Сравнить staging с указанным коммитом git diff --cached Сравнить staging с HEAD Git diff не показывает untracked файлы . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff---cached",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff---cached"
-  },"40": {
+  },"37": {
     "doc": "Commit Read",
     "title": "Git diff [-- index.md] (вообще без номеров коммитов в параметрах)",
     "content": "Сравнивает WT vs Staging . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff----indexmd-%D0%B2%D0%BE%D0%BE%D0%B1%D1%89%D0%B5-%D0%B1%D0%B5%D0%B7-%D0%BD%D0%BE%D0%BC%D0%B5%D1%80%D0%BE%D0%B2-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%BE%D0%B2-%D0%B2-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D1%85",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff----indexmd-вообще-без-номеров-коммитов-в-параметрах"
-  },"41": {
+  },"38": {
     "doc": "Commit Read",
     "title": "Git diff &lt;один коммит&gt;",
     "content": "WT vs Коммит git diff @ . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff-%D0%BE%D0%B4%D0%B8%D0%BD-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff-один-коммит"
-  },"42": {
+  },"39": {
     "doc": "Commit Read",
     "title": "Git Diff --name-only master feature",
     "content": " ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff---name-only-master-feature",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff---name-only-master-feature"
-  },"43": {
+  },"40": {
     "doc": "Commit Read",
     "title": "Git diff commit1:path1 commit2:path2",
     "content": " ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1path1-commit2path2",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1path1-commit2path2"
-  },"44": {
+  },"41": {
     "doc": "Commit Read",
     "title": "Commit Read",
     "content": "@ index.html изменения index.html из HEAD @~1,@~,HEAD~,HEAD~1 изменения index.html из родителя HEAD :index.html index.html из индекса текущего коммита :/text Поиск по тексту . ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Read.html",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Read.html"
-  },"45": {
+  },"42": {
     "doc": "Commit Update",
     "title": "Commit Update",
     "content": " ",
     "url": "/children/Git/2.%20Git%20Commits/Commit%20Update.html",
     "relUrl": "/children/Git/2.%20Git%20Commits/Commit%20Update.html"
-  },"46": {
+  },"43": {
     "doc": "Configuration",
     "title": "Конфигурация Git",
     "content": "Задать имя и почту в репозитории локально (в файле .git/config) . git config user.name \"Name Surname\" git config user.email mail@example.com cat .git/config Вывест конфиг текущей папки (через cat) git config --list Вывести конфиг репозитория текущей папки (через git) Удалить из репозитория текущей папки имя и почту: git config --unset user.name git config --unset user.email git config --remove-section user . Задать имя и почту глобально . git config --global user.name \"...\" git config --global user.email \"...\" git config --system core.autocrlf true Найстроить лайн-брейки на уровне системы cat ~/.gitconfig Вывести глобальный конфиг (через cat) git config --list --global Вывести глобальный конфиг (через git) git config --global -e Открыть конфиг в редакторе по умолчанию . git config --global core.editor /Applications/Sublime\\ Текстовый редактор по умолчанию Примеры для разных редакторов git config --global core.editor \"code --wait\" VsCode . Каскад от более к менее приоритетному: . --local ↓ --global ↓ --system . Алиасы git . git config --global alias.c 'config --global' git c вместо git config --global . ",
     "url": "/children/Git/6.%20Git%20Configuration/Configuration.html#%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F-git",
     "relUrl": "/children/Git/6.%20Git%20Configuration/Configuration.html#конфигурация-git"
-  },"47": {
+  },"44": {
     "doc": "Configuration",
     "title": "Git Help",
     "content": "git config -h помощь git help config помощь по git config . ",
     "url": "/children/Git/6.%20Git%20Configuration/Configuration.html#git-help",
     "relUrl": "/children/Git/6.%20Git%20Configuration/Configuration.html#git-help"
-  },"48": {
+  },"45": {
     "doc": "Configuration",
     "title": "Configuration",
     "content": " ",
     "url": "/children/Git/6.%20Git%20Configuration/Configuration.html",
     "relUrl": "/children/Git/6.%20Git%20Configuration/Configuration.html"
-  },"49": {
+  },"46": {
     "doc": "Установка Docker на Ubuntu",
     "title": "Установка Docker на Ubuntu",
     "content": " ",
     "url": "/children/Docker/DockerOnUbuntu.html",
     "relUrl": "/children/Docker/DockerOnUbuntu.html"
-  },"50": {
+  },"47": {
     "doc": "Head",
     "title": "Git Checkout",
     "content": "git checkout master Обновить WT до состояние ласт-коммита master. Поставить HEAD на master. Обычное переключение между ветками. git checkout @{-1},git checkout - Вернуть HEAD на предыдущее значение . git checkout 1913 перевести HEAD на коммит 1913(без ветки) - в состояние detached head. Исправляется через git checkout master &gt; git-cherry-pick . ",
     "url": "/children/Git/4.%20Head/Head.html#git-checkout",
     "relUrl": "/children/Git/4.%20Head/Head.html#git-checkout"
-  },"51": {
+  },"48": {
     "doc": "Head",
     "title": "История HEAD",
     "content": "cat .git/logs/HEAD git reflog без параметров показывает историю HEAD . ",
     "url": "/children/Git/4.%20Head/Head.html#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F-head",
     "relUrl": "/children/Git/4.%20Head/Head.html#история-head"
-  },"52": {
+  },"49": {
     "doc": "Head",
     "title": "Head",
     "content": "Единственная команда, для того, чтобы двигать только HEAD: git checkout HEAD всегда должна стоять на вершине ветки и никогда на самом коммите. ",
     "url": "/children/Git/4.%20Head/Head.html",
     "relUrl": "/children/Git/4.%20Head/Head.html"
-  },"53": {
+  },"50": {
     "doc": "Установка Jenkins на Ubuntu",
     "title": "Установка Jenkins на Ubuntu",
-    "content": "Прямая ссылка на https://45.89.52.66:8080 . Инструкция DigitalOcean Инструкция с оф сайта Jenkins . Проверить версии софта на сервере . cat /etc/os-release версия ОС . java -version версия Java. Должна быть 11 ? . sudo lsof -i:8080 занят ли порт 8080. Должен быть свободен. grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* Показать sources.list . Репозиторий уже мог быть добавлен. More . Обновление локальных пакетов . sudo apt upgrade sudo apt update sudo apt install ca-certificates . Установка Java . Удалить всю старую джаву. More dpkg-query -W -f='${binary:Package}\\n' | grep -E -e '^(ia32-)?(sun|oracle)-java' -e '^openjdk-' -e '^icedtea' -e '^(default|gcj)-j(re|dk)' -e '^gcj-(.*)-j(re|dk)' -e '^java-common' | xargs sudo apt-get -y remove sudo apt-get -y autoremove . Установить с нуля Java 11 sudo apt-get install openjdk-11-jdk sudo apt-get install fontconfig . Добавить путь к Java nano /etc/environment Прописать JAVA_HOME=\"/usr/lib/jvm/java-1.11.0-openjdk-amd64\" source /etc/environment Перезагрузить echo $JAVA_HOME Проверить всё ли работает . Добавление репозитория jenkins-stable binary . wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add - Добавление ключа репозитория . sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list' Добавление в sources.list . Собственно установка . sudo apt install jenkins . UFW . systemctl edit jenkins добавить [Service] Environment=\"JENKINS_PORT=8888\" sudo nano /etc/default/jenkins Здесь настройки порта менять не получится. Проверить, запущен ли UFW sudo ufw status . Ответ должен быть: Когда UFW включен, 8080 открыт, OpenSSH включен Status: active To Action From -- ------ ---- 8080 ALLOW Anywhere OpenSSH ALLOW Anywhere 8080 (v6) ALLOW Anywhere (v6) OpenSSH (v6) ALLOW Anywhere (v6) . Если пустые правила, надо открыть 8080 (Jenkins по умолчанию) и добавить OpenSSH sudo ufw allow 8080 sudo ufw allow OpenSSH sudo ufw enable . sudo service jenkins status должно быть active(running) sudo systemctl status jenkins должно быть active(running) curl localhost:8080 должно работать netstat -ntulp | grep 8080 . sudo service jenkins start Запуск sudo service jenkins stop Остановить . ",
+    "content": "Прямая ссылка на http://45.89.52.66:8080/login . Инструкция DigitalOcean Инструкция с оф сайта Jenkins . Проверить версии софта на сервере . cat /etc/os-release версия ОС . java -version версия Java. Должна быть 11 ? . sudo lsof -i:8080 занят ли порт 8080. Должен быть свободен. apt remove apache2 если там апач . grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* Показать sources.list . Репозиторий уже мог быть добавлен. More . Обновление локальных пакетов . sudo apt upgrade sudo apt update sudo apt install ca-certificates . Установка Java . Удалить всю старую джаву. More dpkg-query -W -f='${binary:Package}\\n' | grep -E -e '^(ia32-)?(sun|oracle)-java' -e '^openjdk-' -e '^icedtea' -e '^(default|gcj)-j(re|dk)' -e '^gcj-(.*)-j(re|dk)' -e '^java-common' | xargs sudo apt-get -y remove sudo apt-get -y autoremove . Установить с нуля Java 11 sudo apt-get install openjdk-11-jdk sudo apt-get install fontconfig . Добавить путь к Java nano /etc/environment Прописать JAVA_HOME=\"/usr/lib/jvm/java-1.11.0-openjdk-amd64\" source /etc/environment Перезагрузить echo $JAVA_HOME Проверить всё ли работает . Добавление репозитория jenkins-stable binary . wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add - Добавление ключа репозитория . sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list' Добавление в sources.list . Собственно установка . sudo apt install jenkins . UFW . Проверить, запущен ли UFW sudo ufw status . Ответ должен быть: Когда UFW включен, 8080 открыт, OpenSSH включен Status: active To Action From -- ------ ---- 8080 ALLOW Anywhere OpenSSH ALLOW Anywhere 8080 (v6) ALLOW Anywhere (v6) OpenSSH (v6) ALLOW Anywhere (v6) . Если пустые правила, надо открыть 8080 (Jenkins по умолчанию) и добавить OpenSSH sudo ufw allow 8080 sudo ufw allow OpenSSH sudo ufw enable . sudo service jenkins start Запуск sudo service jenkins stop Остановить sudo service jenkins status Статус. должно быть active(running) sudo systemctl status jenkins.service Статус. должно быть active(running) . curl localhost:8080 должно работать netstat -ntulp | grep 8080 sudo lsof -i:8080 Кто слушает порт 8080 . Первый запуск . Прямая ссылка на http://45.89.52.66:8080/login cat /var/lib/jenkins/secrets/initialAdminPassword выставить. Установить Suggested. Настройка языка . Плагин Locale Dashboard-&gt;Настроить Jenkins-&gt;Конфигурация системы-&gt;Ctrl+F “Locale” Default Language: en . ",
     "url": "/children/Jenkins/JenkinsInstallOnUbuntu.html",
     "relUrl": "/children/Jenkins/JenkinsInstallOnUbuntu.html"
-  },"54": {
+  },"51": {
     "doc": "Merge",
     "title": "Merge",
     "content": "Fast-Forward . git merge fix Если ветка fix выше чем ветка ‘master’, на которой стоит HEAD - подвинет master вместе с HEAD на коммит fix. fix не удаляется. Дальше можно переместить HEAD на fix через git checkout fix . cat .git/ORIG_HEAD покажет id предыдущего положения HEAD git branch -f master ORIG_HEAD вернуть master где она была . Истинный мердж . Когда один бранчхед не входит в ветку другого. HEAD стоит на master, мердж с feature. git status должен быть пустой. git diff --name-only master feature покажет какие файлы различаются. git merge-base master feature покажет на каком коммите была развилка. git merge feature анализирует изменение в каждом файле. Пробует auto-merge . CONFLICT . Если мердж прервался cat .git/MERGE_HEAD покажет id коммита, с которым мы мерджились, но возник конфликт. git show e2e4:index.html git show master:index.html git show feature:index.html покажут версии файлов в разных бранчхедах. 7.1-7.2 . git checkout --ours git checkout --theirs git checkout --merge git merge --abort git checkout --conflict=diff3 --merge index.html git merge --continue . ",
     "url": "/children/Git/3.%20Git%20Merge/Merge.html",
     "relUrl": "/children/Git/3.%20Git%20Merge/Merge.html"
-  },"55": {
+  },"52": {
+    "doc": "Putty",
+    "title": "Putty",
+    "content": "Для того чтобы не рвалось соединения в Connection поставить Seconds between keepalives 30 . ",
+    "url": "/children/Ubuntu/Putty.html",
+    "relUrl": "/children/Ubuntu/Putty.html"
+  },"53": {
     "doc": "Repository Create",
     "title": "Git Init",
     "content": "git init Создать репозиторий . ",
     "url": "/children/Git/5.%20Git%20Repository/Repository%20Create.html#git-init",
     "relUrl": "/children/Git/5.%20Git%20Repository/Repository%20Create.html#git-init"
-  },"56": {
+  },"54": {
     "doc": "Repository Create",
     "title": "Repository Create",
     "content": " ",
     "url": "/children/Git/5.%20Git%20Repository/Repository%20Create.html",
     "relUrl": "/children/Git/5.%20Git%20Repository/Repository%20Create.html"
+  },"55": {
+    "doc": "UFW",
+    "title": "UFW",
+    "content": "https://askubuntu.com/questions/541675/ufw-is-blocking-all-even-when-i-set-rules-to-allow sudo ufw status посмотреть правила UFW sudo ufw status verbose . sudo iptables -L -v -n Посмотреть iptables . ufw reset никогда не нажимать . ufw enable вкл ufw disable вкл . Базовая настройка UFW . Проверить чтобы стояло IPV6=yes . sudo nano /etc/default/ufw . Запретить все входящие, разрешить все исходящие . sudo ufw default deny incoming . sudo ufw default allow outgoing . Разрешить входящие ssh . sudo ufw allow ssh . sudo ufw allow 500,4500/udp . sudo ufw allow 7777 . sudo ufw allow 8080 . sudo ufw allow 8081 . Включить . sudo ufw enable . Дальше . Если надо удалить правило: . sudo ufw status numbered . sudo ufw delete 2 . IKEV2 Восстановление . ip route show default . sudo ufw allow 500,4500/udp . sudo nano /etc/ufw/before.rules . Добавить перед *filter (интерфейс ens3) . *nat -A POSTROUTING -s 10.10.10.0/24 -o ens3 -m policy --pol ipsec --dir out -j ACCEPT -A POSTROUTING -s 10.10.10.0/24 -o ens3 -j MASQUERADE COMMIT *mangle -A FORWARD --match policy --pol ipsec --dir in -s 10.10.10.0/24 -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360 COMMIT . Добавить после #End required lines . -A ufw-before-forward --match policy --pol ipsec --dir in --proto esp -s 10.10.10.0/24 -j ACCEPT -A ufw-before-forward --match policy --pol ipsec --dir out --proto esp -d 10.10.10.0/24 -j ACCEPT . Дальше . sudo nano /etc/ufw/sysctl.conf . В конец файла . net/ipv4/ip_forward=1 net/ipv4/conf/all/accept_redirects=0 net/ipv4/conf/all/send_redirects=0 net/ipv4/ip_no_pmtu_disc=1 . ",
+    "url": "/children/Ubuntu/UFW.html",
+    "relUrl": "/children/Ubuntu/UFW.html"
+  },"56": {
+    "doc": "UFW",
+    "title": "Проверка iptables",
+    "content": "iptables -L -v -n . Поставить IPV6=NO а потом вернуть . sudo nano /etc/default/ufw . Удалить все правила UFW из iptables . for i in `iptables -L INPUT --line-numbers |grep '[0-9].*ufw' | cut -f 1 -d ' ' | sort -r `; do iptables -D INPUT $i ; done for i in `iptables -L FORWARD --line-numbers |grep '[0-9].*ufw' | cut -f 1 -d ' ' | sort -r `; do iptables -D FORWARD $i ; done for i in `iptables -L OUTPUT --line-numbers |grep '[0-9].*ufw' | cut -f 1 -d ' ' | sort -r `; do iptables -D OUTPUT $i ; done for i in `iptables -L | grep 'Chain .*ufw' | cut -d ' ' -f 2`; do iptables -X $i ; done . Грохнуть iptables . iptables -F . ",
+    "url": "/children/Ubuntu/UFW.html#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-iptables",
+    "relUrl": "/children/Ubuntu/UFW.html#проверка-iptables"
   },"57": {
     "doc": "Working Tree Update",
     "title": "Git Checkout -- &lt;pathspec&gt;",
