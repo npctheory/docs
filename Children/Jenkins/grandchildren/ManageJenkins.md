@@ -23,3 +23,7 @@ Authorization:
 `sudo mv jenkins.war jenkins_новая_директория`  
 `ll`  
 `sudo service jenkins restart`  
+
+## Изменить цвет результата маркера билда
+**Green Balls** не работает  
+
