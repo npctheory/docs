@@ -5,9 +5,9 @@ grand_parent: Jenkins
 parent: Jenkins Installation
 has_children: true
 nav_order: 1
-pqip: "http://45.89.52.66:8081/"
+jenkinsroot: "http://45.89.52.66:50101/"
 ---
-[Прямая ссылка на {{ page.pqip }}login]({{ page.pqip }}login)  
+[Прямая ссылка на {{ page.jenkinsroot }}login]({{ page.jenkinsroot }}login)  
 
 [Инструкция DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-20-04)  
 [Инструкция с оф сайта Jenkins](https://pkg.jenkins.io/debian-stable/)
@@ -68,22 +68,16 @@ OpenSSH (v6)               ALLOW       Anywhere (v6)</pre>
 `sudo ufw allow OpenSSH`  
 `sudo ufw enable`  
 
-`sudo service jenkins start` Запуск  
-`sudo service jenkins stop` Остановить  
-`sudo service jenkins status` Статус. должно быть active(running)  
-`sudo systemctl status jenkins.service` Статус. должно быть active(running)  
-
 `curl localhost:8080` должно работать  
 `netstat -ntulp | grep 8080`  
-`sudo lsof -i:8080` Кто слушает порт 8080  
 
 ### Первый запуск
-[Прямая ссылка на http://{{ page.pqip }}:8080/login](http://{{ page.pqip }}:8080/login)  
+[Прямая ссылка на {{ page.jenkinsroot }}login]({{ page.jenkinsroot }}login)  
 `cat /var/lib/jenkins/secrets/initialAdminPassword`  выставить.
 Установить Suggested.  
 
 ### Настройка языка
-{{ page.pqip }} 
+{{ page.jenkinsroot }} 
 Ctrl+F "Locale"  
 Default Language: `en`  
 Ignore browser preference  

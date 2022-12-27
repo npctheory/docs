@@ -4,7 +4,7 @@ layout: page
 grand_parent: Jenkins
 parent: Jenkins Installation
 nav_order: 3
-jenkinsroot: "http://45.89.52.66:8081/"
+jenkinsroot: "http://45.89.52.66:50101/"
 ---
 ### Установка плагинов
 [{{ page.jenkinsroot }}pluginManager/]({{ page.jenkinsroot }}pluginManager/)  

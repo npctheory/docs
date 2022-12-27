@@ -3,7 +3,7 @@ title: Jenkins Jobs Adv
 layout: page
 parent: Jenkins
 nav_order: 101
-jenkinsroot: "http://45.89.52.66:8081/"
+jenkinsroot: "http://45.89.52.66:50101/"
 ---
 ## Jenkins jobs
 New Item  

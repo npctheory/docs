@@ -1,8 +1,7 @@
 ---
-title: Jenkins Installation
+title: JenkinsSem
 layout: page
 parent: Jenkins
-has_children: true
-nav_order: 999
+nav_order: 4
 jenkinsroot: "http://45.89.52.66:50101/"
 ---
