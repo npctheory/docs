@@ -1,5 +1,5 @@
 ---
-title: Docker advit
+title: Docker Advit
 layout: page
 parent: Docker
 ---
@@ -12,13 +12,14 @@ parent: Docker
 
 `docker ps`  показать живые контейнеры
 `docker ps -a`  показать и живые и отключенные контейнеры  
+
 `docker images` показать все имиджи    
 
 `docker search nginx` найти на докерхабе имидж tomcat  
 
 `docker pull nginx` скачать но не запускать.
 
-`docker run -d -p 1234:80 nginx`  запустить (скачать если не скачан) как демон  
+`docker run -d -p 1234:80 nginx`  запустить (скачать если не скачан) и отключиться d - дисконнект   
 `docker run -it -p 1234:80 nginx`  запустить интерактивно  
 `-p 1234:8080` Чтобы обратиться к порту 8080 контейнера докер, надо обратиться к порту 1234 машины.  
 
@@ -34,7 +35,7 @@ parent: Docker
 
 ### Dockerfile (docker build)
 `docker build -t testimage:v1 .`  сделать имидж из Dockerfile в текущей папке  
-`docker run -d -p 1377:80 testimage:v1` запустить  
+`docker run -d -p 1377:80 testimage:v1` запустить 1377 внаружи - 80 внутри 
 
 `nano ~/mydocker/Dockerfile`  
 ```dockerfile

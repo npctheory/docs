@@ -1,0 +1,28 @@
+---
+title: Docker Minin
+layout: page
+parent: Docker
+---
+`docker version` посмотреть версию  
+`docker ps --help`  
+
+`docker build .`  
+`docker run e2e4`  
+```dockerfile
+FROM python
+
+WORKDIR /app
+
+COPY . .
+
+CMD ["python", "index.py"]
+```
+
+`docker pull node`  
+
+`docker run -it node`  запустить в интерактивном режиме  
+`exit` выйти из контейнера  
+
+`docker container prune` удалить все остановленные контейнеры  
+
+### Dockerfile

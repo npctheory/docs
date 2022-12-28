@@ -25,7 +25,7 @@
   },"4": {
     "doc": "Резюме",
     "title": "Разработчик С#/React.js(TypeScript)",
-    "content": ".NET 7 . ASP.NET: Web Api, Blazor, Razor Pages, MVC(Razor Views) .NET Framework / Mono . ASP.NET Webforms, ASP.NET MVC 5 . Microsoft Sql Server . Dapper, NHibernate, Entity Framework . PostgreSQL . SQLite . Контроль версий . Git: Git Submodule, Git Hooks Branching: Git Flow, GitHub Flow, Conventional Commits, Semantic Commits GitHub: GitHub Actions: Dependabot, Renovatebot . GitHub Pages/GitHub Wikis: Markdown(Kramdown, GFM), coveralls.io, shields.io Генерация статических сайтов: Jekyll, Gatsby . CI/CD . Jenkins Appveyor Octopus Deploy . Контейнеризация . Docker: Dockerfile, Docker Compose, Docker Swarm Kubernetes: . Таск-трекеры . Jira, Bitrix24 . Вики-системы . Confluence MediaWiki . ",
+    "content": ".NET 7 . ASP.NET: Web Api, Blazor, Razor Pages, MVC(Razor Views) .NET Framework / Mono . ASP.NET Webforms, ASP.NET MVC 5 . Microsoft Sql Server . Dapper, NHibernate, Entity Framework . PostgreSQL . SQLite . Контроль версий . Git: Git Submodule, Git Hooks Branching: Git Flow, GitHub Flow, Conventional Commits, Semantic Commits . GitHub: GitHub Actions: Dependabot, Renovatebot . GitHub Pages/GitHub Wikis: Markdown(Kramdown, GFM), coveralls.io, shields.io Генерация статических сайтов: Jekyll, Gatsby . CI/CD . Jenkins Appveyor Octopus Deploy . Контейнеризация . Docker: Dockerfile, Docker Compose, Docker Swarm Kubernetes: . Таск-трекеры . Jira, Bitrix24 . Вики-системы . Confluence MediaWiki . ",
     "url": "/100000.%20Resume.html#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA-%D1%81reactjstypescript",
     "relUrl": "/100000.%20Resume.html#разработчик-сreactjstypescript"
   },"5": {
@@ -317,20 +317,20 @@
     "url": "/children/Git/6.%20Git%20Configuration/Configuration.html",
     "relUrl": "/children/Git/6.%20Git%20Configuration/Configuration.html"
   },"53": {
-    "doc": "Docker advit",
+    "doc": "Docker Advit",
     "title": "Docker",
     "content": "sudo systemctl status docker docker -v . ",
     "url": "/children/Docker/DockerAdvit.html#docker",
     "relUrl": "/children/Docker/DockerAdvit.html#docker"
   },"54": {
-    "doc": "Docker advit",
+    "doc": "Docker Advit",
     "title": "Команды",
-    "content": "docker run hello-world скачает имидж hello-world и запустит . docker ps показать живые контейнеры docker ps -a показать и живые и отключенные контейнеры docker images показать все имиджи . docker search nginx найти на докерхабе имидж tomcat . docker pull nginx скачать но не запускать. docker run -d -p 1234:80 nginx запустить (скачать если не скачан) как демон docker run -it -p 1234:80 nginx запустить интерактивно -p 1234:8080 Чтобы обратиться к порту 8080 контейнера докер, надо обратиться к порту 1234 машины. docker stop e2e4 остановить docker rm e2e4 грохнуть контейнер docker rmi hello-world удалить имидж (контейнеры должны быть остановлены) . docker build -t myimage:v1 . создать имидж в текущей директории . docker tag myimage:v1 myimage:v2 переименовать тег . docker exec -it e2e4 /bin/bash залогиниться в уже запущенный контейнер и запустить bash . Dockerfile (docker build) . docker build -t testimage:v1 . сделать имидж из Dockerfile в текущей папке docker run -d -p 1377:80 testimage:v1 запустить . nano ~/mydocker/Dockerfile . FROM ubuntu:20.04 RUN apt-get -y update RUN apt-get -y install apache2 RUN echo `Hello World from Docker! &gt; /var/www/html/index.html` CMD [\"/usr/sbin/apache2ctl\", \"-DFOREGROUND\"] EXPOSE 80 . Установка . sudo apt-get update sudo apt-get install \\ ca-certificates \\ curl \\ gnupg \\ lsb-release sudo apt install apt-transport-https sudo mkdir -p /etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg echo \\ \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \\ $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null sudo apt update sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin . sudo usermod -aG docker $USER Добавить права текущему юзеру . ",
+    "content": "docker run hello-world скачает имидж hello-world и запустит . docker ps показать живые контейнеры docker ps -a показать и живые и отключенные контейнеры . docker images показать все имиджи . docker search nginx найти на докерхабе имидж tomcat . docker pull nginx скачать но не запускать. docker run -d -p 1234:80 nginx запустить (скачать если не скачан) и отключиться d - дисконнект docker run -it -p 1234:80 nginx запустить интерактивно -p 1234:8080 Чтобы обратиться к порту 8080 контейнера докер, надо обратиться к порту 1234 машины. docker stop e2e4 остановить docker rm e2e4 грохнуть контейнер docker rmi nginx удалить имидж (контейнеры должны быть остановлены) . docker build -t myimage:v1 . создать имидж в текущей директории . docker tag myimage:v1 myimage:v2 переименовать тег . docker exec -it e2e4 /bin/bash залогиниться в уже запущенный контейнер и запустить bash . Dockerfile (docker build) . docker build -t testimage:v1 . сделать имидж из Dockerfile в текущей папке docker run -d -p 1377:80 testimage:v1 запустить 1377 внаружи - 80 внутри . nano ~/mydocker/Dockerfile . FROM ubuntu:20.04 RUN apt-get -y update RUN apt-get -y install apache2 RUN echo `Hello World from Docker! &gt; /var/www/html/index.html` CMD [\"/usr/sbin/apache2ctl\", \"-DFOREGROUND\"] EXPOSE 80 . Установка . sudo apt-get update sudo apt-get install \\ ca-certificates \\ curl \\ gnupg \\ lsb-release sudo apt install apt-transport-https sudo mkdir -p /etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg echo \\ \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \\ $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null sudo apt update sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin . sudo usermod -aG docker $USER Добавить права текущему юзеру . ",
     "url": "/children/Docker/DockerAdvit.html#%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B",
     "relUrl": "/children/Docker/DockerAdvit.html#команды"
   },"55": {
-    "doc": "Docker advit",
-    "title": "Docker advit",
+    "doc": "Docker Advit",
+    "title": "Docker Advit",
     "content": " ",
     "url": "/children/Docker/DockerAdvit.html",
     "relUrl": "/children/Docker/DockerAdvit.html"
@@ -341,9 +341,9 @@
     "url": "/children/Docker/DockerOnUbuntu.html",
     "relUrl": "/children/Docker/DockerOnUbuntu.html"
   },"57": {
-    "doc": "Docker TC",
-    "title": "Docker TC",
-    "content": " ",
+    "doc": "Docker Tim Corey",
+    "title": "Docker Tim Corey",
+    "content": "Создать index.md В той же папке создать Dockerfile . # COPY ./html/ Скопировать всё из папки html и имидж, в папку /usr/local/apache2/htdocs/ FROM httpd:alpine COPY ./html/ /usr/local/apache2/htdocs/ . имидж - это ридонли билд docker build -t hello-docker:1.0.0 . docker image history e2e4 лог процесса билда имиджа по шагам . docker run --name first-container -p 8080:80 запустить контейнер 8080 внутри - 80 внутри docker stop e2e4 остановить контейнер docker rm удалить контейнер . После изменения в файлах надо создавать новый имидж. Можно оставить название и поменять версию. docker build -t hello-docker:1.0.1 . docker run -d --name first-container -p 8081:80 hello-docker:1.0.0 docker run -d --name second-container -p 8080:80 hello-docker:1.0.1 . RabbitMQ . docker run -d --hostname my-rabbit --name some-rabbit -p 8080:15672 rabbitmq:3-management -d disconnected --hostname нужно для rabbitmq --name имя контейнера -p 8080 снаружи для порта 15672 внутри :3-management имидж с rabbitmq и менеджмент-интерфейсом . Логин: guest Пароль: guest . docker pull mysql . ",
     "url": "/children/Docker/DockerTimcorey.html",
     "relUrl": "/children/Docker/DockerTimcorey.html"
   },"58": {
