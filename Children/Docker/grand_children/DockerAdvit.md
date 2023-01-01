@@ -1,7 +1,8 @@
 ---
 title: Docker Advit
 layout: page
-parent: Docker
+grand_parent: Docker
+parent: Docker Tutorials
 ---
 ## Docker
 `sudo systemctl status docker`  

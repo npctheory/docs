@@ -1,0 +1,127 @@
+---
+title: Docker Minin
+layout: page
+grand_parent: Docker
+parent: Docker Tutorials
+---
+[Видео](https://www.youtube.com/watch?v=n9uCgUzfeRQ)  
+`docker version` посмотреть версию  
+`docker ps --help`  хелп по ps  
+`docker image --help`
+
+`docker build .`  Создать имидж и докерфайла в рабочей директории  
+`docker run e2e4`  Запустить имидж (контейнер запускается другой командой)
+
+`docker pull node`  Скачать имидж node.js  
+
+`docker run -it node`  запустить в интерактивном режиме  
+`exit` выйти из контейнера  
+
+`docker container prune` удалить все остановленные контейнеры  
+
+### Dockerfile
+```dockerfile
+# Докер смотрит, есть ли имидж node локально, качает
+FROM node
+
+# То же что и cd /app
+WORKDIR /app
+
+# Первая точка - директория, где лежит сам Dockerfile
+# Вторая точка - куда в образе поместить относительно рабочей директории  
+COPY . .
+
+#Выполнить команду npm install
+RUN npm install
+
+#Открыть порт при запуске. Необязательно, но best practice.
+EXPOSE 3000
+
+#Запустить приложение app.js в ноде
+#RUN используется для сборки образа
+#CMD для запуска образа
+CMD ["node", "app.js"]
+```
+
+`docker stop e2e4` Остановить контейнер  
+docker run работать на такой контейнер не будет  
+`docker start e2e4` запустить установленный контейнер  
+
+### Изменения в dockerfile
+```dockerfile
+FROM node
+WORKDIR /app
+#
+COPY package.json /app
+COPY . .
+RUN npm install
+EXPOSE 3000
+CMD ["node", "app.js"]
+```
+
+`docker attach e2e4` подключиться к контейнеру  
+
+`docker logs e2e4`  что выводилось в контейнере
+`docker logs containername`  что выводилось - по имени контейнера
+
+`docker run -d -p 3000:3000 --name containername --rm e2e4`  
+`--rm` Удалить контейнер если выполнен `docker stop`  
+
+### .Dockerignore
+Какие файлы и папки из директории Dockerfile не нужны в образе
+```dockerignore
+.git
+.idea
+Dockerfile
+```
+
+`docker image instpect myimage`  Показать из каких слоев сделан имидж  
+
+### ENV-переменные в Dockerfilew
+```dockerfile
+FROM node
+WORKDIR /app
+COPY package.json /app
+COPY . .
+RUN npm install
+# Номер порта выносится в переменную 
+ENV PORT 4200
+EXPOSE $PORT
+CMD ["node", "app.js"]
+```
+
+### Задание env переменной на запуске  
+`-e` параметр  
+`docker run -d -p 3000:80 -e PORT=80 --rm --name logsapp logsapp:env`  
+
+### Все ENV-переменные в файле
+Создается файл **config/.env**  
+```dockerfile
+PORT=4200
+```
+
+`docker run -d -p 3000:80 -env-file ./config/.env --rm --name logsapp logsapp:env`  
+
+### Docker Volumes
+Общая папка для нескольких контейнеров  
+`docker run -d -p 3000:3000 -v vol1:/app/data -v vol2:"/Users/akupc/WebStormPojrects/app:/app" -v /app/node_modules/ --rm --name appcontainer appimage:apptag`
+`docker volume --help`  
+`-v myvolume:/app/data` Имя волюма logs, расположение /app/data
+`docker volume ls` посмотреть список волюмов  
+`docker volume inspect myvolume`
+### ENV-переменные в Dockerfilew
+```dockerfile
+FROM node
+WORKDIR /app
+COPY package.json /app
+COPY . .
+RUN npm install
+ENV PORT 4200
+VOLUME [ "/app/data" ]
+EXPOSE $PORT
+CMD [ "node", "app.js" ]
+```
+
+Создаются автоматически параметром `-v`  
+Создать волюм из консоли  
+`docker volume create myvolume`  

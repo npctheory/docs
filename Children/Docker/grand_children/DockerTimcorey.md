@@ -1,7 +1,8 @@
 ---
 title: Docker Tim Corey
 layout: page
-parent: Docker
+grand_parent: Docker
+parent: Docker Tutorials
 ---
 Создать **index.md**  
 В той же папке **создать Dockerfile**  
