@@ -1,7 +1,8 @@
 ---
 title: Branch Update and Delete
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 404
 ---
 Git Branch не умеет переносить ветку, на которой мы сейчас находимся  

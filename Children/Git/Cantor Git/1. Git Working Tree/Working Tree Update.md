@@ -1,7 +1,8 @@
 ---
 title: Working Tree Update
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 101
 ---
 {% include_relative content/git-checkout-wt-update.md %} 

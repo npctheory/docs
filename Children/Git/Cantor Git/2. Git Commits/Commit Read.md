@@ -1,7 +1,8 @@
 ---
 title: Commit Read
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 201
 ---
 `@ index.html` изменения index.html из HEAD  

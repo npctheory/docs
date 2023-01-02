@@ -1,7 +1,8 @@
 ---
 title: Head
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 402
 ---
 Единственная команда, для того, чтобы двигать только HEAD: **git checkout**  

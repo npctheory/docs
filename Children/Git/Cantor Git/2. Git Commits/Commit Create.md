@@ -1,7 +1,8 @@
 ---
 title: Commit Create
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 203
 ---
 {% include_relative content/git-status.md %}

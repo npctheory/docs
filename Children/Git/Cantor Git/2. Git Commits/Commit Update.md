@@ -1,6 +1,7 @@
 ---
 title: Commit Update
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 204
 ---

@@ -1,7 +1,8 @@
 ---
 title: Branch and Head Log
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 402
 ---
 {% include_relative content/git-branch-list-mode.md %}  

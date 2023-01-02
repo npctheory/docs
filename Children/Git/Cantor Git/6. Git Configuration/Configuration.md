@@ -1,7 +1,8 @@
 ---
 title: Configuration
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 601
 ---
 {% include_relative content/git-config.md %}

@@ -1,7 +1,8 @@
 ---
 title: Commit List
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 202
 ---
 {% include_relative content/git-log.md %}

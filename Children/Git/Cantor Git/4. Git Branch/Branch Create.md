@@ -1,7 +1,8 @@
 ---
 title: Branch Create
 layout: page
-parent: Git
+grand_parent: Git
+parent: Cantor Git
 nav_order: 403
 ---
 Первая ветка master создается первым **git commit** после **git init**  
