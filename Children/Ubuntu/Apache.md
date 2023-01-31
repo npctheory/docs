@@ -1,8 +1,8 @@
 ---
 title: Apache
 layout: page
+parent: Ubuntu
 has_children: true
-has_grandchildren: true
 nav_order: 12
 ---
 ## Apache

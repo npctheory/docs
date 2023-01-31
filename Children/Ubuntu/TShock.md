@@ -1,6 +1,6 @@
 ---
 title: TShock
 layout: page
-has_children: true
+parent: Ubuntu
 nav_order: 1001
 ---

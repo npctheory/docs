@@ -1,6 +1,7 @@
 ---
 title: UFW
 layout: page
+parent: Ubuntu
 nav_order: 11
 ---
 {: .important }
