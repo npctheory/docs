@@ -8,837 +8,879 @@
     "doc": "Git",
     "title": "Git",
     "content": "Новый репозиторий . git init git add . git commit -m \"init\" git remote add origin https://github.com/aq-coding/имярепозитория.git git push -u origin master . Новая ветка . git checkout -b dev git add . git commit -m \"init\" git push origin dev . ",
-    "url": "/1.%20Git.html",
-    "relUrl": "/1.%20Git.html"
+    "url": "/parents/1.%20Git.html",
+    "relUrl": "/parents/1.%20Git.html"
   },"2": {
     "doc": "1. Github создание репозитория",
     "title": "1. Github создание репозитория",
-    "content": "Новый репозиторий на Github . New Repository, Create Repository на Github . Настроить Secrets . DOCKER_USERNAME DOCKER_PASSWORD . Получить доступ к существующему репозиторию . Репозиторий должен быть в списке моих репозиториев в веб-интерфейсе гитхаба. Clone or download, Clone with https git clone https://....git . ",
+    "content": "Новый репозиторий на Github . New Repository, Create Repository на Github Initialize with Readme.md . Получить доступ к существующему репозиторию . Репозиторий должен быть в списке моих репозиториев в веб-интерфейсе гитхаба. Clone or download, Clone with https git clone https://....git . ",
     "url": "/children/DemoAppMvc/1.%20Github.html",
     "relUrl": "/children/DemoAppMvc/1.%20Github.html"
   },"3": {
+    "doc": "10. HomeController",
+    "title": "10. HomeController",
+    "content": "wwwroot/images/noimage.jpg ViewModels/HomeDetailsViewModel.cs Controllers/HomeController.cs Views/Home/Create.cshtml Views/Home/Details.cshtml Views/Home/Index.cshtml . wwwroot/images/noimage.jpg . wwwroot/images/noimage.jpg . ViewModels/HomeDetailsViewModel.cs . public class HomeDetailsViewModel { public Employee Employee { get; set; } public string PageTitle { get; set; } } . Controllers/HomeController.cs . using Microsoft.AspNetCore.Mvc; public class HomeController : Controller { private readonly IEmployeeRepository _employeeRepository; public HomeController(IEmployeeRepository employeeRepository) { _employeeRepository = employeeRepository; } public ViewResult Index() { var model = _employeeRepository.GetAllEmployees(); return View(model); } public ViewResult Details(int? id) { HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel() { Employee = _employeeRepository.GetEmployee(id??1), PageTitle = \"Employee Details\" }; return View(homeDetailsViewModel); } [HttpGet] public ViewResult Create() { return View(); } [HttpPost] public IActionResult Create(Employee employee) { if (ModelState.IsValid) { Employee newEmployee = _employeeRepository.Add(employee); return RedirectToAction(\"details\", new { id = newEmployee.Id }); } return View(); } } . Views/Home/Create.cshtml . @model Employee @{ ViewBag.Title = \"Create Employee\"; } &lt;form asp-controller=\"Home\" asp-action=\"Create\" method=\"post\"&gt; &lt;div class=\"mb-3\"&gt; &lt;label asp-for=\"Name\" class=\"form-label\"&gt;&lt;/label&gt; &lt;input asp-for=\"Name\" class=\"form-control\" /&gt; &lt;span asp-validation-for=\"Name\" class=\"text-danger\"&gt;&lt;/span&gt; &lt;/div&gt; &lt;div class=\"mb-3\"&gt; &lt;label asp-for=\"Email\" class=\"form-label\"&gt;&lt;/label&gt; &lt;input asp-for=\"Email\" class=\"form-control\" /&gt; &lt;span asp-validation-for=\"Email\" class=\"text-danger\"&gt;&lt;/span&gt; &lt;/div&gt; &lt;div class=\"mb-3\"&gt; &lt;label asp-for=\"Departament\" class=\"form-label\"&gt;&lt;/label&gt; &lt;select asp-for=\"Departament\" asp-items=\"Html.GetEnumSelectList&lt;Dept&gt;()\" class=\"form-control\"&gt; &lt;option value=\"\"&gt;Please select departament&lt;/option&gt; &lt;/select&gt; &lt;span asp-validation-for=\"Departament\"&gt;&lt;/span&gt; &lt;/div&gt; &lt;div asp-validation-summary=\"All\" class=\"text-danger\"&gt;&lt;/div&gt; &lt;div class=\"row\"&gt; &lt;div class=\"col-sm-10\"&gt; &lt;button type=\"submit\" class=\"btn btn-primary\"&gt;Create&lt;/button&gt; &lt;/div&gt; &lt;/div&gt; &lt;/form&gt; . Views/Home/Details.cshtml . @model HomeDetailsViewModel @{ ViewBag.Title = \"Employee Details\"; } &lt;div class=\"row justify-content-center m-3\"&gt; &lt;div class=\"col-sm-8\"&gt; &lt;div class=\"card\"&gt; &lt;div class=\"card-header\"&gt; &lt;h1&gt;@Model.Employee.Name&lt;/h1&gt; &lt;/div&gt; &lt;div class=\"card-body text-center\"&gt; &lt;img class=\"card-img-top\" src=\"~/images/noimage.jpg\" /&gt; &lt;h4&gt;Employee ID : @Model.Employee.Id&lt;/h4&gt; &lt;h4&gt;Email : @Model.Employee.Email&lt;/h4&gt; &lt;h4&gt;Departament : @Model.Employee.Departament&lt;/h4&gt; &lt;/div&gt; &lt;div class=\"card-footer text-center\"&gt; &lt;a asp-controller=\"home\" asp-action=\"index\" class=\"btn btn-primary\"&gt;Back&lt;/a&gt; &lt;a href=\"#\" class=\"btn btn-primary\"&gt;Edit&lt;/a&gt; &lt;a href=\"#\" class=\"btn btn-danger\"&gt;Delete&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; . Views/Home/Index.cshtml . @model IEnumerable&lt;Employee&gt; @{ ViewBag.Title = \"Employee List\"; } &lt;div class=\"row row-cols-1 row-cols-md-3 g-4 mt-3\"&gt; @foreach (var employee in Model) { &lt;div class=\"col\"&gt; &lt;div class=\"card\"&gt; &lt;div class=\"card-header\"&gt; &lt;h5 class=\"card-title\"&gt;@employee.Name&lt;/h5&gt; &lt;/div&gt; &lt;img class=\"card-img-top\" src=\"~/images/noimage.jpg\" asp-append-version=true /&gt; &lt;div class=\"card-footer text-center\"&gt; &lt;a asp-controller=\"home\" asp-action=\"details\" asp-route-id=\"@employee.Id\" class=\"btn btn-primary m-1\"&gt;View&lt;/a&gt; &lt;a href=\"#\" class=\"btn btn-primary m-1\"&gt;Edit&lt;/a&gt; &lt;a href=\"#\" class=\"btn btn-danger m-1\"&gt;Delete&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; } &lt;/div&gt; . ",
+    "url": "/children/DemoAppMvc/10.%20HomeController.html",
+    "relUrl": "/children/DemoAppMvc/10.%20HomeController.html"
+  },"4": {
     "doc": "Ubuntu",
     "title": "Создать пару ключей SSH",
     "content": "ssh-keygen Enter Enter . ",
-    "url": "/10.%20Ubuntu.html#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%BF%D0%B0%D1%80%D1%83-%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%B9-ssh",
-    "relUrl": "/10.%20Ubuntu.html#создать-пару-ключей-ssh"
-  },"4": {
+    "url": "/parents/10.%20Ubuntu.html#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%BF%D0%B0%D1%80%D1%83-%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%B9-ssh",
+    "relUrl": "/parents/10.%20Ubuntu.html#создать-пару-ключей-ssh"
+  },"5": {
     "doc": "Ubuntu",
     "title": "Ubuntu",
     "content": "clear очистить экран cat /etc/os-release версия ОС sudo ufw reset никогда не нажимать . ",
-    "url": "/10.%20Ubuntu.html",
-    "relUrl": "/10.%20Ubuntu.html"
-  },"5": {
+    "url": "/parents/10.%20Ubuntu.html",
+    "relUrl": "/parents/10.%20Ubuntu.html"
+  },"6": {
     "doc": "Резюме",
     "title": "Разработчик С#/React.js(TypeScript)",
     "content": ".NET 7 . ASP.NET: Web Api, Blazor, Razor Pages, MVC(Razor Views) .NET Framework / Mono . ASP.NET Webforms, ASP.NET MVC 5 . Microsoft Sql Server . Dapper, NHibernate, Entity Framework . PostgreSQL . SQLite . Контроль версий . Git: Git Submodule, Git Hooks Branching: Git Flow, GitHub Flow, Conventional Commits, Semantic Commits . GitHub: GitHub Actions: Dependabot, Renovatebot . GitHub Pages/GitHub Wikis: Markdown(Kramdown, GFM), coveralls.io, shields.io Генерация статических сайтов: Jekyll, Gatsby . CI/CD . Jenkins Appveyor Octopus Deploy . Контейнеризация . Docker: Dockerfile, Docker Compose, Docker Swarm Kubernetes: . Таск-трекеры . Jira, Bitrix24 . Вики-системы . Confluence MediaWiki . ",
-    "url": "/100000.%20Resume.html#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA-%D1%81reactjstypescript",
-    "relUrl": "/100000.%20Resume.html#разработчик-сreactjstypescript"
-  },"6": {
+    "url": "/parents/100000.%20Resume.html#%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA-%D1%81reactjstypescript",
+    "relUrl": "/parents/100000.%20Resume.html#разработчик-сreactjstypescript"
+  },"7": {
     "doc": "Резюме",
     "title": "Резюме",
     "content": " ",
-    "url": "/100000.%20Resume.html",
-    "relUrl": "/100000.%20Resume.html"
-  },"7": {
+    "url": "/parents/100000.%20Resume.html",
+    "relUrl": "/parents/100000.%20Resume.html"
+  },"8": {
     "doc": "101. Dockerfile Examples",
     "title": "101. Dockerfile Examples",
     "content": "Apache . Установить имидж апач Скопировать все файлы из подпапки проекта html В папку /usr/local/apache2/htdocs/ . FROM httpd:alpine COPY ./html/ /usr/local/apache2/htdocs/ . Ubuntu+Apache . Установить имидж Ubuntu Внутри него поставить apache2 . FROM ubuntu:20.04 RUN apt-get -y update RUN apt-get -y install apache2 RUN echo `Hello World from Docker! &gt; /var/www/html/index.html` CMD [\"/usr/sbin/apache2ctl\", \"-DFOREGROUND\"] EXPOSE 80 . ",
     "url": "/children/Docker/101.%20Dockerfile%20Examples.html",
     "relUrl": "/children/Docker/101.%20Dockerfile%20Examples.html"
-  },"8": {
+  },"9": {
     "doc": "102. Dockerfile Commands",
     "title": "102. Dockerfile Commands",
     "content": "FROM . ENV . Лучше объявлять переменные окружения в docker . RUN . Для выполнения linux-команд RUN-команд может быть несколько. CMD - одна . COPY . Копирует файлы с хоста в контейнер . CMD . Точка входа в контейнер. Для запуска пэйлоада контейнера . ",
     "url": "/children/Docker/102.%20Dockerfile%20Commands.html",
     "relUrl": "/children/Docker/102.%20Dockerfile%20Commands.html"
-  },"9": {
+  },"10": {
     "doc": "103. CLI Images",
     "title": "103. CLI Images",
     "content": "Вывести список имиджей . docker images docker image history e2e4 Посмотреть из каких слоев сделан имидж с IMAGE ID e2e4 docker search nginx найти на докерхабе имидж tomcat . Скачать существующий имидж . docker pull Как docker, но без создания контейнера . Создать имидж из Dockerfile в текущей папке . docker build -t demo-app:1.0.0 . Сохранить контейнер с CONTAINER ID e4e5 в имидж img1:v2 . docker commit e4e5 demo-app:v2 . Создать копию имиджа с другим тегом . docker tag demo-app:v1 demo-app:copy Создаст новый имидж img1:copy . Удалить . docker rmi e2e4 e2e4 это IMAGE ID из docker images. Можно имя имиджа . ",
     "url": "/children/Docker/103.%20CLI%20Images.html",
     "relUrl": "/children/Docker/103.%20CLI%20Images.html"
-  },"10": {
+  },"11": {
     "doc": "104. CLI Containers",
     "title": "104. CLI Containers",
     "content": "Запуск контейнера из имиджа . docker run -d --name firstcontainer -p 8081:80 hello-docker:1.0.0 Из имиджа hello-docker запустить контейнер firstcontainer Порт 80 внутреннего приложения открыт как порт 8080 докер-энджина Совмещает в себе docker pull и docker start . Список контейнеров (включенных и выключенных) . docker ps -a . Остановка и запуск остановленного контенера . docker stop e2e4 остановить контейнер с CONTAINER ID e2e4 docker start e2e4 запустить остановленный контейнер . Сделать имидж из запущенного контейнера . Зайти в detached-контейнер в интерактивном режиме . docker exec -it e4e5 /bin/bash залогиниться в уже запущенный контейнер и запустить bash docker exec -it e4e5 /bin/sh если нет bash - выбрать sh exit (внутри контейнера) выйти docker commit e4e5 img1:v2 Сохранить контейнер с CONTAINER ID e4e5 в имидж img1:v2 . Удаление контейнеров . docker stop e2e4 остановить контейнер с CONTAINER ID e2e4 docker rm e2e4 удалить контейнер . ",
     "url": "/children/Docker/104.%20CLI%20Containers.html",
     "relUrl": "/children/Docker/104.%20CLI%20Containers.html"
-  },"11": {
+  },"12": {
     "doc": "105. Docker Compose",
     "title": "105. Docker Compose",
     "content": "Docker Compose . Автоматически создает docker network для контейнеров в yml-файле . ",
     "url": "/children/Docker/105.%20Docker%20Compose.html",
     "relUrl": "/children/Docker/105.%20Docker%20Compose.html"
-  },"12": {
+  },"13": {
     "doc": "106. CLI Network",
     "title": "106. CLI Network",
     "content": "Вывести сеть докера docker network ls . ",
     "url": "/children/Docker/106.%20CLI%20Network.html",
     "relUrl": "/children/Docker/106.%20CLI%20Network.html"
-  },"13": {
+  },"14": {
+    "doc": "11. Валидация",
+    "title": "11. Валидация",
+    "content": "using System.ComponentModel.DataAnnotations; public class Employee { public int Id { get; set; } [Required] [MaxLength(50,ErrorMessage =\"Name cannot exceed 50\")] public string Name { get; set; } [Required] [EmailAddress(ErrorMessage = \"Email invalid\")] [Display(Name=\"Office Email\")] public string Email { get; set; } [Required] public Dept? Departament { get; set; } } . ",
+    "url": "/children/DemoAppMvc/11.%20%D0%92%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F.html",
+    "relUrl": "/children/DemoAppMvc/11.%20%D0%92%D0%B0%D0%BB%D0%B8%D0%B4%D0%B0%D1%86%D0%B8%D1%8F.html"
+  },"15": {
     "doc": "111. Dockerignore",
     "title": "111. Dockerignore",
     "content": " ",
     "url": "/children/Docker/111.%20Dockerignore.html",
     "relUrl": "/children/Docker/111.%20Dockerignore.html"
-  },"14": {
+  },"16": {
     "doc": "2. Docker Advit",
     "title": "Docker",
     "content": "sudo systemctl status docker docker -v . ",
     "url": "/children/Docker/grand_children/2.%20DockerAdvit.html#docker",
     "relUrl": "/children/Docker/grand_children/2.%20DockerAdvit.html#docker"
-  },"15": {
+  },"17": {
     "doc": "2. Docker Advit",
     "title": "Команды",
     "content": "docker run hello-world скачает имидж hello-world и запустит . docker ps показать живые контейнеры docker ps -a показать и живые и отключенные контейнеры . docker images показать все имиджи . docker search nginx найти на докерхабе имидж tomcat . docker pull nginx скачать но не запускать. docker run -d -p 1234:80 nginx запустить (скачать если не скачан) и отключиться d - дисконнект docker run -it -p 1234:80 nginx запустить интерактивно -p 1234:8080 Чтобы обратиться к порту 8080 контейнера докер, надо обратиться к порту 1234 машины. docker stop e2e4 остановить docker rm e2e4 грохнуть контейнер docker rmi nginx удалить имидж (контейнеры должны быть остановлены) . docker build -t myimage:v1 . создать имидж в текущей директории . docker tag myimage:v1 myimage:v2 переименовать тег . docker exec -it e2e4 /bin/bash залогиниться в уже запущенный контейнер и запустить bash . Dockerfile (docker build) . docker build -t testimage:v1 . сделать имидж из Dockerfile в текущей папке docker run -d -p 1377:80 testimage:v1 запустить 1377 внаружи - 80 внутри . nano ~/mydocker/Dockerfile . FROM ubuntu:20.04 RUN apt-get -y update RUN apt-get -y install apache2 RUN echo `Hello World from Docker! &gt; /var/www/html/index.html` CMD [\"/usr/sbin/apache2ctl\", \"-DFOREGROUND\"] EXPOSE 80 . Установка Docker Engine на Ubuntu . sudo apt-get update sudo apt-get install \\ ca-certificates \\ curl \\ gnupg \\ lsb-release sudo apt install apt-transport-https sudo mkdir -p /etc/apt/keyrings curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg echo \\ \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \\ $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null sudo apt update sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin . sudo usermod -aG docker $USER Добавить права текущему юзеру . ",
     "url": "/children/Docker/grand_children/2.%20DockerAdvit.html#%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D1%8B",
     "relUrl": "/children/Docker/grand_children/2.%20DockerAdvit.html#команды"
-  },"16": {
+  },"18": {
     "doc": "2. Docker Advit",
     "title": "2. Docker Advit",
     "content": " ",
     "url": "/children/Docker/grand_children/2.%20DockerAdvit.html",
     "relUrl": "/children/Docker/grand_children/2.%20DockerAdvit.html"
-  },"17": {
-    "doc": "2. Docker",
-    "title": "2. Docker",
-    "content": "Dockerfile . FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base WORKDIR /app EXPOSE 80 EXPOSE 443 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build WORKDIR /src COPY [\"DemoAppMvc.csproj\", \".\"] RUN dotnet restore \"./DemoAppMvc.csproj\" COPY . WORKDIR \"/src/.\" RUN dotnet build \"DemoAppMvc.csproj\" -c Release -o /app/build FROM build AS publish RUN dotnet publish \"DemoAppMvc.csproj\" -c Release -o /app/publish /p:UseAppHost=false FROM base AS final WORKDIR /app COPY --from=publish /app/publish . ENTRYPOINT [\"dotnet\", \"DemoAppMvc.dll\"] .dockerignore .dockerignore **/.classpath **/.dockerignore **/.env **/.git **/.gitignore **/.project **/.settings **/.toolstarget **/.vs **/.vscode **/*.*proj.user **/*.dbmdl **/*.jfm **/azds.yaml **/bin **/charts **/docker-compose* **/Dockerfile* **/node_modules **/npm-debug.log **/obj **/secrets.dev.yaml **/values.dev.yaml LICENSE README.md . docker compose . Правый клик на проекте&gt; Add &gt; Container Orchestrations support&gt; Docker Compose . ",
-    "url": "/children/DemoAppMvc/2.%20Dockerfile.html",
-    "relUrl": "/children/DemoAppMvc/2.%20Dockerfile.html"
-  },"18": {
+  },"19": {
+    "doc": "2. Git рабочий цикл",
+    "title": "2. Git рабочий цикл",
+    "content": "Начало работы с репозиторием . git status . git log --pretty=format:'%C(yellow)%h %C(dim green)%ad %C(reset)| %C(cyan)%s%d %C(#667788)[%an]' --date=format:'%F %R' . git log origin/master . git pull . Выбор ветки . git branch Проверить ветку git checkout -b task1 Переключиться или . git branch task1 git checkout task1 . Коммит . git add * git status git commit -m \"Added file and updated\" git push --set-upstream origin task1 . В веб-интерфейсе выбрать принять push, создать pull request . В веб-интрефейсе смерджить пулл-реквест . Удалить ветку . git checkout master git branch -d task1 git push origin --delete task1 git checkout -b task1 . ",
+    "url": "/children/DemoAppMvc/2.%20Git.html",
+    "relUrl": "/children/DemoAppMvc/2.%20Git.html"
+  },"20": {
     "doc": "Github",
     "title": "Github",
     "content": " ",
-    "url": "/2.%20Github.html",
-    "relUrl": "/2.%20Github.html"
-  },"19": {
+    "url": "/parents/2.%20Github.html",
+    "relUrl": "/parents/2.%20Github.html"
+  },"21": {
     "doc": "201. Установка Docker на Ubuntu",
     "title": "201. Установка Docker на Ubuntu",
     "content": "Установка Docker на Ubuntu . ",
     "url": "/children/Docker/201.%20DockerOnUbuntu.html",
     "relUrl": "/children/Docker/201.%20DockerOnUbuntu.html"
-  },"20": {
+  },"22": {
     "doc": "3. Docker Nana",
     "title": "Конфигурация yaml-файла Docker Compose для установки Mongo+Mongo Express",
     "content": "version:'3' services: mongodb: image: mongo ports: - 27017:27017 environment: - ME_INITDB_ROOT_USERNAME=admin - ME_INITDB_ROOT_PASSWORD=password mongodb-express: image: mongo-express ports: - 8080:8081 environment: - ME_CONFIG_MONGODB_ADMINUSERNAME=admin - ME_CONFIG_MONGODB_ADMINPASSWORD=password - ME_CONFIG_MONGODB_SERVER=mongodb . Запуск конейнеров из docker compose (с автоматическим созданием docker-network) . Выполнить в docker-compose файл mongo.yaml . docker-compose -f mongo.yaml up . -f выбрать файл up запустить все контейнеры . Остановить контейнеры docker compose и удалить docker network . docker-compose -f mongo.yaml down . Dockerfile Приложения на Node.js . FROM node:13-alpine ENV MONGO_DB_USERNAME=admin MONGO_DB_PWD=password RUN mkdir -p /home/app COPY ./app /home/app CMD [\"node\", \"home/app/server.js\"] . Билд докерфайла вместе с запуском . docker build -t my-app:1.0 . \\ docker run my-app:1.0 docker exec -it e4e5 /bin/sh ls /home/app . ",
     "url": "/children/Docker/grand_children/3.%20DockerNana.html#%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F-yaml-%D1%84%D0%B0%D0%B9%D0%BB%D0%B0-docker-compose-%D0%B4%D0%BB%D1%8F-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8-mongomongo-express",
     "relUrl": "/children/Docker/grand_children/3.%20DockerNana.html#конфигурация-yaml-файла-docker-compose-для-установки-mongomongo-express"
-  },"21": {
+  },"23": {
     "doc": "3. Docker Nana",
     "title": "AWS",
     "content": "Ссылка Пуши имиджа my-app . docker build # Тэг нужен для того, чтобы docker push заливал имидж не на dockerhub, а в AWS docker tag docker push . version:'3' services: mongodb: image: mongo ports: - 27017:27017 environment: - ME_INITDB_ROOT_USERNAME=admin - ME_INITDB_ROOT_PASSWORD=password mongodb-express: image: mongo-express ports: - 8080:8081 environment: - ME_CONFIG_MONGODB_ADMINUSERNAME=admin - ME_CONFIG_MONGODB_ADMINPASSWORD=password - ME_CONFIG_MONGODB_SERVER=mongodb . ",
     "url": "/children/Docker/grand_children/3.%20DockerNana.html#aws",
     "relUrl": "/children/Docker/grand_children/3.%20DockerNana.html#aws"
-  },"22": {
+  },"24": {
     "doc": "3. Docker Nana",
     "title": "Docker Volumes в Compose",
     "content": "Том mongo-data . version: '3' services: mongodb: image: mongo ports: - 27017:27017 environment: - ME_INITDB_ROOT_USERNAME=admin - ME_INITDB_ROOT_PASSWORD=password volumes: - mongo-data:/data/db mongo-express: image: mongo-express ports: - 8080:8081 environment: - ME_CONFIG_MONGODB_ADMINUSERNAME=admin - ME_CONFIG_MONGODB_ADMINPASSWORD=password - ME_CONFIG_MONGODB_SERVER=mongodb #Здесь монтируется том mongo-data volumes: mongo-data: driver: local . ",
     "url": "/children/Docker/grand_children/3.%20DockerNana.html#docker-volumes-%D0%B2-compose",
     "relUrl": "/children/Docker/grand_children/3.%20DockerNana.html#docker-volumes-в-compose"
-  },"23": {
+  },"25": {
     "doc": "3. Docker Nana",
     "title": "3. Docker Nana",
     "content": "Посмотреть логи, которые произвел контейнер . docker logs e4e5 . docker pull mongo docker pull mongo-express . Docker network. Базовые команды . docker network ls docker network create mongo-network . Загрузка-запуск контейнера Mongo . Стандартный порт монги: 27017 . docker run -p 27017:27017 mongo . Запускаем монгу и задаем переменные окружения через -e . docker run -d \\ -p 27017:27017 \\ -e MONGO_INITDB_ROOT_USERNAME=admin \\ -e MONGO_INITDB_ROOT_PASSWORD=password \\ --name mongodb \\ --net mongo-network \\ mongo # Проверить что всё запустилось docker logs e4e5 docker logs e4e5 | tail . Загрузка-запуск контейнера Mongo Express . Mongo Express - веб-фронтенд для монги как phpmyadmin . docker run -d \\ -p 8081:8081 \\ -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \\ -e ME_CONFIG_MONGODB_ADMINPASSWORD=password \\ --net mongo-network \\ --name mongo-express \\ -e ME_CONFIG_MONGODB_SERVER=mongodb \\ mongo-express # Проверить что всё запустилось docker logs e4e5 docker logs e4e5 | tail . ",
     "url": "/children/Docker/grand_children/3.%20DockerNana.html",
     "relUrl": "/children/Docker/grand_children/3.%20DockerNana.html"
-  },"24": {
+  },"26": {
     "doc": "Github Actions",
     "title": "Github Actions",
     "content": " ",
-    "url": "/3.%20Github%20Actions.html",
-    "relUrl": "/3.%20Github%20Actions.html"
-  },"25": {
-    "doc": "3. Solution",
-    "title": "3. Solution",
-    "content": "CLI: Создание солюшена и проекта . dotnet new sln --name DemoAppMvc dotnet new web -o DemoAppMvc dotnet sln add ./DemoAppMvc.csproj dotnet build dotnet run ./DemoAppMvc.csproj . Запуск солюшена . ",
-    "url": "/children/DemoAppMvc/3.%20Solution.html",
-    "relUrl": "/children/DemoAppMvc/3.%20Solution.html"
-  },"26": {
+    "url": "/parents/3.%20Github%20Actions.html",
+    "relUrl": "/parents/3.%20Github%20Actions.html"
+  },"27": {
+    "doc": "3. Солюшен",
+    "title": "3. Солюшен",
+    "content": "VS Code . Ctrl+Shift+P Generate Assets for Build and Debug . CLI: Создание солюшена и проекта . dotnet new gitignore dotnet new sln --name DemoAppMvc dotnet new web -o DemoAppMvc dotnet sln add ./DemoAppMvc/DemoAppMvc.csproj dotnet build . Запуск проекта . cd DemoAppMvc dotnet run --project ./DemoAppMvc.csproj . ",
+    "url": "/children/DemoAppMvc/3.%20%D0%A1%D0%BE%D0%BB%D1%8E%D1%88%D0%B5%D0%BD.html",
+    "relUrl": "/children/DemoAppMvc/3.%20%D0%A1%D0%BE%D0%BB%D1%8E%D1%88%D0%B5%D0%BD.html"
+  },"28": {
     "doc": "Docker",
     "title": "Docker",
     "content": " ",
-    "url": "/4.%20Docker.html",
-    "relUrl": "/4.%20Docker.html"
-  },"27": {
+    "url": "/parents/4.%20Docker.html",
+    "relUrl": "/parents/4.%20Docker.html"
+  },"29": {
     "doc": "4. Docker Minin",
     "title": "4. Docker Minin",
     "content": "Видео docker version посмотреть версию docker ps --help хелп по ps docker image --help . docker build . Создать имидж и докерфайла в рабочей директории docker run e2e4 Запустить имидж (контейнер запускается другой командой) . docker pull node Скачать имидж node.js . docker run -it node запустить в интерактивном режиме exit выйти из контейнера . docker container prune удалить все остановленные контейнеры . Dockerfile . # Докер смотрит, есть ли имидж node локально, качает FROM node # То же что и cd /app WORKDIR /app # Первая точка - директория, где лежит сам Dockerfile # Вторая точка - куда в образе поместить относительно рабочей директории COPY . #Выполнить команду npm install RUN npm install #Открыть порт при запуске. Необязательно, но best practice. EXPOSE 3000 #Запустить приложение app.js в ноде #RUN используется для сборки образа #CMD для запуска образа CMD [\"node\", \"app.js\"] . docker stop e2e4 Остановить контейнер docker run работать на такой контейнер не будет docker start e2e4 запустить установленный контейнер . Изменения в dockerfile . FROM node WORKDIR /app # COPY package.json /app COPY . RUN npm install EXPOSE 3000 CMD [\"node\", \"app.js\"] . docker attach e2e4 подключиться к контейнеру . docker logs e2e4 что выводилось в контейнере docker logs containername что выводилось - по имени контейнера . docker run -d -p 3000:3000 --name containername --rm e2e4 --rm Удалить контейнер если выполнен docker stop .Dockerignore . Какие файлы и папки из директории Dockerfile не нужны в образе .git .idea Dockerfile . docker image instpect myimage Показать из каких слоев сделан имидж . ENV-переменные в Dockerfilew . FROM node WORKDIR /app COPY package.json /app COPY . RUN npm install # Номер порта выносится в переменную ENV PORT 4200 EXPOSE $PORT CMD [\"node\", \"app.js\"] . Задание env переменной на запуске . -e параметр docker run -d -p 3000:80 -e PORT=80 --rm --name logsapp logsapp:env . Все ENV-переменные в файле . Создается файл config/.env . PORT=4200 . docker run -d -p 3000:80 -env-file ./config/.env --rm --name logsapp logsapp:env . Docker Volumes . Общая папка для нескольких контейнеров docker run -d -p 3000:3000 -v vol1:/app/data -v vol2:\"/Users/akupc/WebStormPojrects/app:/app\" -v /app/node_modules/ --rm --name appcontainer appimage:apptag docker volume --help -v myvolume:/app/data Имя волюма logs, расположение /app/data docker volume ls посмотреть список волюмов docker volume inspect myvolume . ENV-переменные в Dockerfilew . FROM node WORKDIR /app COPY package.json /app COPY . RUN npm install ENV PORT 4200 VOLUME [ \"/app/data\" ] EXPOSE $PORT CMD [ \"node\", \"app.js\" ] . Создаются автоматически параметром -v Создать волюм из консоли docker volume create myvolume . ",
     "url": "/children/Docker/grand_children/4.%20DockerMinin.html",
     "relUrl": "/children/Docker/grand_children/4.%20DockerMinin.html"
-  },"28": {
+  },"30": {
     "doc": "4. Github Actions",
     "title": "4. Github Actions",
-    "content": "Azure . ci.yml . name: Publish on: workflow_dispatch: push: branches: - main jobs: publish: runs-on: ubuntu-latest steps: - uses: actions/checkout@v3 - name: .NET 7 Installation uses: actions/setup-dotnet@v3 with: dotnet-version: '7.0.x' - name: Package restore run: dotnet restore ./DemoAppMvc.sln - name: Build run: dotnet build ./DemoAppMvc.sln --configuration Release --no-restore - name: Publish run: dotnet publish ./DemoAppMvc.sln --configuration Release --no-build - name: Docker Build &amp; Push Action uses: mr-smithers-excellent/docker-build-push@v5.9 with: image: towk/demoapp registry: docker.io username: $ password: $ . ",
+    "content": "Билд .NET без деплоя .github/workflows/ci.yml . name: Publish on: workflow_dispatch: push: branches: - main jobs: publish: runs-on: ubuntu-latest steps: - uses: actions/checkout@v3 - name: .NET 7 Installation uses: actions/setup-dotnet@v3 with: dotnet-version: '7.0.x' - name: Package restore run: dotnet restore ./DemoAppMvc.sln - name: Build run: dotnet build ./DemoAppMvc.sln --configuration Release --no-restore - name: Publish run: dotnet publish ./DemoAppMvc.sln --configuration Release --no-build . Деплой по ssh . - name: Deploy uses: appleboy/ssh-action@master with: host: username: key: port: 22 script: | . Деплой в докерхаб . Настроить Secrets DOCKER_USERNAME DOCKER_PASSWORD . - name: Docker build-publish uses: mr-smithers-excellent/docker-build-push@v5.9 with: image: towk/demoapp tags: latest registry: docker.io username: $ password: $ . Dockerfile . FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base WORKDIR /app EXPOSE 80 EXPOSE 443 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build WORKDIR /src COPY [\"DemoAppMvc/DemoAppMvc.csproj\", \"DemoAppMvc/\"] RUN dotnet restore \"DemoAppMvc/DemoAppMvc.csproj\" COPY . WORKDIR \"/src/DemoAppMvc\" RUN dotnet build \"DemoAppMvc.csproj\" -c Release -o /app/build FROM build AS publish RUN dotnet publish \"DemoAppMvc.csproj\" -c Release -o /app/publish /p:UseAppHost=false FROM base AS final WORKDIR /app COPY --from=publish /app/publish . ENTRYPOINT [\"dotnet\", \"DemoAppMvc.dll\"] .dockerignore .dockerignore **/.classpath **/.dockerignore **/.env **/.git **/.gitignore **/.project **/.settings **/.toolstarget **/.vs **/.vscode **/*.*proj.user **/*.dbmdl **/*.jfm **/azds.yaml **/bin **/charts **/docker-compose* **/Dockerfile* **/node_modules **/npm-debug.log **/obj **/secrets.dev.yaml **/values.dev.yaml LICENSE README.md . docker compose . Правый клик на проекте&gt; Add &gt; Container Orchestrations support&gt; Docker Compose . ",
     "url": "/children/DemoAppMvc/4.%20Github%20Actions.html",
     "relUrl": "/children/DemoAppMvc/4.%20Github%20Actions.html"
-  },"29": {
-    "doc": "5. Git рабочий цикл",
-    "title": "5. Git рабочий цикл",
-    "content": "Начало работы с репозиторием . git status . git log --pretty=format:'%C(yellow)%h %C(dim green)%ad %C(reset)| %C(cyan)%s%d %C(#667788)[%an]' --date=format:'%F %R' . git log origin/master . git pull . Выбор ветки . git branch Проверить ветку git checkout -b feature/mock_repository Переключиться или . git branch feature/mock_repository git checkout feature/mock_repository . Коммит . git add * git status git commit -m \"Added file and updated\" git push origin . Отправить в Github . git push --set-upstream origin feature/mock_repository . На Github создать pull-request . В веб-интерфейсе выбрать Pull requests Create pull request . Хозяин репозитория мерджит . Merge pull request . Удалить ветку . git checkout master git branch -d feature/mock_repository git push origin --delete denis_task009 git checkout -b feature/sql_repository . ",
-    "url": "/children/DemoAppMvc/5.%20Git.html",
-    "relUrl": "/children/DemoAppMvc/5.%20Git.html"
-  },"30": {
+  },"31": {
+    "doc": "5. Docker Compose",
+    "title": "Docker Compose",
+    "content": "nginx.conf docker-compose.yml . До запуска docker compose up проверить чтобы ничего не было запущено . docker compose up --force-recreate -d . запустить docker compose с обновлением имиджей (–force-recreate) и в фоне (–detached) . docker compose stop . остановить docker compose когда он в состоянии detached . docker ps -a Список контейнеров docker image prune Удалить старые имиджи . nginx.conf . worker_processes 4; events { worker_connections 1024; } http { server { listen 80; location /demoapp { proxy_pass http://backend:80; } } } . docker-compose.yml . version: '3.4' services: proxy: image: nginx:latest container_name: reverse_proxy_demo depends_on: - backend volumes: - ./nginx.conf:/etc/nginx/nginx.conf ports: - 80:80 backend: environment: - ASPNETCORE_ENVIRONMENT: \"Development\" image: towk/demoapp:latest ports: - 5032:80 . ",
+    "url": "/children/DemoAppMvc/5.%20Docker%20Compose.html#docker-compose",
+    "relUrl": "/children/DemoAppMvc/5.%20Docker%20Compose.html#docker-compose"
+  },"32": {
+    "doc": "5. Docker Compose",
+    "title": "5. Docker Compose",
+    "content": "Пакуем приложения ASP.NET Core с помощью Docker . ",
+    "url": "/children/DemoAppMvc/5.%20Docker%20Compose.html",
+    "relUrl": "/children/DemoAppMvc/5.%20Docker%20Compose.html"
+  },"33": {
     "doc": "Jenkins",
     "title": "Jenkins",
     "content": "Прямая ссылка на http://45.89.52.66:50101/ . sudo systemctl start jenkins.service Запуск sudo systemctl restart jenkins.service Перезапустить sudo systemctl stop jenkins.service Остановить . sudo systemctl status jenkins.service Статус. должно быть active(running) . Поменять порт с 8080 на другой systemctl edit jenkins Добавить [Service] Environment=\"JENKINS_PORT=8081\" . sudo nano /etc/default/jenkins Здесь настройки порта менять не получится. Альтернативы Jenkins Bamboo, CircleCi, Gitlab CICD, Jetbrains Teamcity, Travis . ",
-    "url": "/5.%20Jenkins.html",
-    "relUrl": "/5.%20Jenkins.html"
-  },"31": {
+    "url": "/parents/5.%20Jenkins.html",
+    "relUrl": "/parents/5.%20Jenkins.html"
+  },"34": {
     "doc": "Dotnet",
     "title": "Dotnet",
     "content": " ",
-    "url": "/502.%20Dotnet.html",
-    "relUrl": "/502.%20Dotnet.html"
-  },"32": {
+    "url": "/parents/502.%20Dotnet.html",
+    "relUrl": "/parents/502.%20Dotnet.html"
+  },"35": {
     "doc": "VS Code",
     "title": "VS Code",
     "content": "Сделать git-bash терминалом по умолчанию: . Ctrl+Shift+P -&gt; Terminal: Select Default Profile Выбрать из списка . Настроить keep alive для git-bash в Windows . https://superuser.com/questions/699676/how-to-prevent-ssh-from-disconnecting-if-its-been-idle-for-a-while ssh {USERNAME}@{URL} -p 22 -o \"ServerAliveInterval 60\"{ENTER}{DELAY 1000}{PASSWORD}{ENTER} для keepass . ",
-    "url": "/506.%20VSCode.html",
-    "relUrl": "/506.%20VSCode.html"
-  },"33": {
+    "url": "/parents/506.%20VSCode.html",
+    "relUrl": "/parents/506.%20VSCode.html"
+  },"36": {
+    "doc": "6. Program.cs",
+    "title": "6. Program.cs",
+    "content": "Program.cs . var builder = WebApplication.CreateBuilder(args); builder.Services.AddControllersWithViews(); var app = builder.Build(); app.UseStaticFiles(); app.MapControllerRoute( name: \"default\", pattern: \"{controller=Home}/{action=Index}/{id?}\"); app.Run(); . ",
+    "url": "/children/DemoAppMvc/6.%20Program_cs.html",
+    "relUrl": "/children/DemoAppMvc/6.%20Program_cs.html"
+  },"37": {
+    "doc": "7. Модели",
+    "title": "7. Модели",
+    "content": "Models/Dept.cs Models/Employee.cs ViewModels/HomeDetailsViewModel.cs . Models/Dept.cs . public enum Dept { None, HR, IT, Payroll } . Models/Employee.cs . using System.ComponentModel.DataAnnotations; public class Employee { public int Id { get; set; } public string Name { get; set; } public string Email { get; set; } public Dept? Departament { get; set; } } . ",
+    "url": "/children/DemoAppMvc/7.%20%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8.html",
+    "relUrl": "/children/DemoAppMvc/7.%20%D0%9C%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8.html"
+  },"38": {
+    "doc": "8. Bootstrap&Jquery",
+    "title": "8. Bootstrap&Jquery",
+    "content": "libman wwwroot/images/employees.png Views/_ViewImports.cshtml Views/_ViewStart.cshtml Views/Shared/_Layout.cshtml . libman Bootstrap Jquery . cd DemoAppMvc mkdir wwwroot libman init libman install bootstrap libman install jquery . wwwroot/images/employees.png . wwwroot/images/employees.png . Views/_ViewImports.cshtml . @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers . Views/_ViewStart.cshtml . @{ Layout = \"_Layout\"; } . Views/Shared/_Layout.cshtml . &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;meta name=\"viewport\" content=\"width=device-width\" /&gt; &lt;link href=\"~/lib/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\" /&gt; &lt;script src=\"~/lib/jquery/jquery.min.js\"&gt;&lt;/script&gt; &lt;script src=\"~/lib/bootstrap/js/bootstrap.min.js\"&gt;&lt;/script&gt; &lt;title&gt;@ViewBag.Title&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;header class=\"navbar navbar-expand-sm navbar-dark bg-dark\"&gt; &lt;nav class=\"container\"&gt; &lt;a class=\"navbar-brand\" asp-action=\"index\" asp-controller=\"home\"&gt; &lt;img src=\"~/images/employees.png\" height=\"30\" width=\"30\" /&gt; &lt;/a&gt; &lt;button type=\"button\" class=\"navbar-toggler\" data-bs-toggle=\"collapse\" data-bs-target=\"#collapsibleNavbar\"&gt; &lt;span class=\"navbar-toggler-icon\"&gt;&lt;/span&gt; &lt;/button&gt; &lt;div class=\"collapse navbar-collapse\" id=\"collapsibleNavbar\"&gt; &lt;ul class=\"navbar-nav\"&gt; &lt;li class=\"nav-item\"&gt; &lt;a asp-action=\"index\" asp-controller=\"home\" class=\"nav-link\"&gt;List&lt;/a&gt; &lt;/li&gt; &lt;li class=\"nav-item\"&gt; &lt;a asp-action=\"create\" asp-controller=\"home\" class=\"nav-link\"&gt;Create&lt;/a&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;/nav&gt; &lt;/header&gt; &lt;main class=\"container\"&gt; @RenderBody() &lt;/main&gt; &lt;/body&gt; &lt;/html&gt; . ",
+    "url": "/children/DemoAppMvc/8.%20Bootstrap.html",
+    "relUrl": "/children/DemoAppMvc/8.%20Bootstrap.html"
+  },"39": {
+    "doc": "9. Mock Repository",
+    "title": "9. Mock Repository",
+    "content": "Models/IEmployeeRepository.cs Models/MockEmployeeRepository.cs DI Мокапа Репозитория . Models/IEmployeeRepository.cs . public interface IEmployeeRepository { Employee GetEmployee(int Id); IEnumerable&lt;Employee&gt; GetAllEmployees(); Employee Add(Employee employee); } . Models/MockEmployeeRepository.cs . public class MockEmployeeRepository : IEmployeeRepository { private List&lt;Employee&gt; _employeeList; public MockEmployeeRepository() { _employeeList = new List&lt;Employee&gt;() { new Employee(){Id = 1, Name = \"Mary\", Departament = Dept.HR, Email=\"mary@example.com\"}, new Employee(){Id = 2, Name = \"John\", Departament = Dept.IT, Email=\"john@example.com\"}, new Employee(){Id = 3, Name = \"Sam\", Departament = Dept.IT, Email=\"sam@example.com\"} }; } public Employee GetEmployee(int Id) { return _employeeList.FirstOrDefault&lt;Employee&gt;(e =&gt; e.Id == Id); } public IEnumerable&lt;Employee&gt; GetAllEmployees() { return _employeeList; } public Employee Add(Employee employee) { employee.Id = _employeeList.Max(e =&gt; e.Id) + 1; _employeeList.Add(employee); return employee; } } . DI Repository Mockup . //var builder = WebApplication.CreateBuilder(args); builder.Services.AddSingleton&lt;IEmployeeRepository, MockEmployeeRepository&gt;(); //builder.Services.AddControllersWithViews(); . ",
+    "url": "/children/DemoAppMvc/9.%20MockRepository.html",
+    "relUrl": "/children/DemoAppMvc/9.%20MockRepository.html"
+  },"40": {
     "doc": "JekyllApp",
     "title": "JekyllApp",
     "content": " ",
-    "url": "/900.%20JekyllApp.html",
-    "relUrl": "/900.%20JekyllApp.html"
-  },"34": {
+    "url": "/parents/900.%20JekyllApp.html",
+    "relUrl": "/parents/900.%20JekyllApp.html"
+  },"41": {
     "doc": "DemoAppMvc",
     "title": "DemoAppMvc",
     "content": "Новый репозиторий . git init git add . git commit -m \"init\" git remote add origin https://github.com/aq-coding/DemoAppMvc.git git push -u origin master . Новая ветка . git checkout -b dev git add . git commit -m \"init\" git push origin dev . ",
-    "url": "/901.%20DemoAppMvc.html",
-    "relUrl": "/901.%20DemoAppMvc.html"
-  },"35": {
+    "url": "/parents/901.%20DemoAppMvc.html",
+    "relUrl": "/parents/901.%20DemoAppMvc.html"
+  },"42": {
     "doc": "901. Docker Курсы/Туториалы",
     "title": "901. Docker Курсы/Туториалы",
     "content": " ",
     "url": "/children/Docker/901.%20DockerTutorials.html",
     "relUrl": "/children/Docker/901.%20DockerTutorials.html"
-  },"36": {
+  },"43": {
     "doc": "AdvitGit",
     "title": "AdvitGit",
     "content": "Перед началом работы всегда делается git pull . Работа с локальным репозиторием . git status git add * git commit -m \"Initial\" . История . echo \"aa\" &gt; file.txt # Создать новый файл с текстом аа echo \"aa\" &gt;&gt; file4.txt # Добавить в конец файла текст аа . Показать изменения во всех файлах в предыдущем коммите . git log git log -p ??? git log -1 -p ??? . Вернуть файл в состояние до изменения. Чтобы git status показывал “no changes” . git checkout -- file1.txt . Посмотреть что было добавлено через git add в current commit . git diff --staged . Github SSH . Создать репозиторий через WebGUI гитхаба. git clone ....git echo \"HelloWorld\" &gt; file1.txt git add . git commit -m \"My first\" git push origin . Ветки . В master коммиты не делаются. Только merge. git init myapp git add . git commit -m \"message\" git branch develop #Создание бранчхеда fix_error git checkout develop #Передвинуть HEAD на бранчхед fix_error . Полный рабочий цикл . Ссылка Ветку обычно называют имя-разрабочика_номер-тикета . git checkout -b aq_task001 #Работа с проектом... git add . git commit -m \"Added changes\" git push --set-upstream origin aq_task001 #Со своего гитхаба нажимем кнопку Compare &amp; pull request #Пишем коммент Create Pull Request . Сеньор делает Merge pull request Удаляется бранч локально git branch -d aq_task001 Удаляется бранч удаленно git push origin --delete aq_task001 . Tags . git tags git tag v1.0.1 Создать тег git tag -d v1.0.1 удалить тег локально git push origin --delete v1.0.1 удалить удаленно . ",
     "url": "/children/Git/AdvitGit.html",
     "relUrl": "/children/Git/AdvitGit.html"
-  },"37": {
+  },"44": {
     "doc": "Apache",
     "title": "Apache",
     "content": "sudo systemctl start apache2.service sudo systemctl restart apache2.service . cd /var/www/html/ . sudo systemctl status apache2.service -l --no-pager journalctl -xe . sudo lsof -i:80 sudo lsof -i:443 sudo lsof -i -P -n | grep LISTEN Все порты где есть прослушка . nano /etc/httpd/conf/httpd.conf nano /etc/apache2/ports.conf . sudo ufw app list Должен быть Apache. Если нет, то добавить: sudo ufw allow 'Apache' . Если нет профиля: sudo nano /etc/ufw/applications.d/apache2-utils.ufw.profile . [Apache] title=Web Server description=Apache v2 is the next generation of the omnipresent Apache web server. ports=80/tcp [Apache Secure] title=Web Server (HTTPS) description=Apache v2 is the next generation of the omnipresent Apache web server. ports=443/tcp [Apache Full] title=Web Server (HTTP,HTTPS) description=Apache v2 is the next generation of the omnipresent Apache web server. ports=80,443/tcp . Forbidden 403 . На папке html . find ./ -type d -exec chmod 755 -R {} \\; find ./ -type f -exec chmod 644 {} \\; . Удаление . sudo apt remove apache2 sudo apt-get autoremove . ",
     "url": "/children/Ubuntu/Apache.html",
     "relUrl": "/children/Ubuntu/Apache.html"
-  },"38": {
+  },"45": {
     "doc": "Branch Create",
     "title": "Git Branch",
     "content": "git branch feature Создать на последнем коммите вершину feature git branch --force feature 54a4 Создать или подвинуть если уже есть вершину feature на коммит 54a4. git branch feature HEAD@{6} создать вершину feature на шестом положении HEAD из рефлога git branch feature HEAD@{'2017-09-12 22:49:07 +0200'} восстановить вершину feature на состояние HEAD из даты . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#git-branch",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#git-branch"
-  },"39": {
+  },"46": {
     "doc": "Branch Create",
     "title": "Git Checkout",
     "content": "git checkout -b fix создает вершину fix, а если такая уже есть, ошибка? Двигает HEAD на fix. git checkout -B feature 54a4 новая ветка feature создается на 54a4 Эта команда делает то же, что . git branch -f feature (создать вершину master на коммите, на котором стоит вершина, на которой стоит HEAD) и git checkout feature переместить HEAD на feature . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#git-checkout",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#git-checkout"
-  },"40": {
+  },"47": {
     "doc": "Branch Create",
     "title": "Создать ветку для промежуточного результата",
     "content": "git checkout -b fix git commit -m \"Промежуточный результат\" git checkout master . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D0%BC%D0%B5%D0%B6%D1%83%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D0%B3%D0%BE-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B0",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#создать-ветку-для-промежуточного-результата"
-  },"41": {
+  },"48": {
     "doc": "Branch Create",
     "title": "Подвинуть вершину master на несколько коммитов назад, а текущую ветку оставить под названием fix",
     "content": "git branch fix git branch --f master 54a4 Всё, что осталось выше 54a4 теперь в ветке fix или . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#%D0%BF%D0%BE%D0%B4%D0%B2%D0%B8%D0%BD%D1%83%D1%82%D1%8C-%D0%B2%D0%B5%D1%80%D1%88%D0%B8%D0%BD%D1%83-master-%D0%BD%D0%B0-%D0%BD%D0%B5%D1%81%D0%BA%D0%BE%D0%BB%D1%8C%D0%BA%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%BE%D0%B2-%D0%BD%D0%B0%D0%B7%D0%B0%D0%B4-%D0%B0-%D1%82%D0%B5%D0%BA%D1%83%D1%89%D1%83%D1%8E-%D0%B2%D0%B5%D1%82%D0%BA%D1%83-%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BF%D0%BE%D0%B4-%D0%BD%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5%D0%BC-fix",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html#подвинуть-вершину-master-на-несколько-коммитов-назад-а-текущую-ветку-оставить-под-названием-fix"
-  },"42": {
+  },"49": {
     "doc": "Branch Create",
     "title": "Branch Create",
     "content": "Первая ветка master создается первым git commit после git init Дальше ветки создаются командой git branch или git checkout -b . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Create.html"
-  },"43": {
+  },"50": {
     "doc": "Branch Update and Delete",
     "title": "Удаление ветки",
     "content": "git branch -d fix Удалить ветку fix Сработает только если ветка посередине графа git branch -D fix игнорирует положение вершины . git reset для того чтобы, не трогая WT, откатывать индекс + двигать ветку+HEAD . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2%D0%B5%D1%82%D0%BA%D0%B8",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#удаление-ветки"
-  },"44": {
+  },"51": {
     "doc": "Branch Update and Delete",
     "title": "Git Reset --soft &lt;commit&gt;",
     "content": "Двигает вершину бранчи, и вместе с ней HEAD. WT + Индекс не остаются как были. Используется для того чтобы упаковать несколько предыдущих коммитов в один новый. git reset --soft 9e5e Подвинуть вершину бранчи и вместе с ней HEAD, в коммит 9e5e git reset --soft HEAD~ Подвинуть вершину бранчи и вместе с ней HEAD на один коммит назад . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---soft-commit",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---soft-commit"
-  },"45": {
+  },"52": {
     "doc": "Branch Update and Delete",
     "title": "Git Reset [--mixed] &lt;commit&gt; (по умолчанию)",
     "content": "То же что --soft, но сбрасыва индекс текущего коммита git reset 9e5e Подвинуть вершину бранчи, HEAD, изменить Index на коммит 9e5e git reset 9e5e --mixed -||- git reset HEAD Откатить индекс до состояние прошлого коммита. Использовать после git add . чтобы отменить лишнее проиндексированное git reset HEAD .idea Убрать из staginng файлы .idea . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---mixed-commit-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---mixed-commit-по-умолчанию"
-  },"46": {
+  },"53": {
     "doc": "Branch Update and Delete",
     "title": "Git Reset --hard &lt;commit&gt;",
     "content": "git reset --hard 2fad Для того, чтоб отменить вообще всё сделанное после коммита 2fad - вернуть текущую вершину[master] и HEAD вместе с ней на коммит 2fad. Коммиты, оставшиеся выше, останутся в анонимной ветке. Если запомнить номер коммита (найти через cat .git/ORIG_HEAD или в git reflog) можно вернуть master и HEAD обратно так же чере git reset --hard. git reset --hard HEAD . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---hard-commit",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html#git-reset---hard-commit"
-  },"47": {
+  },"54": {
     "doc": "Branch Update and Delete",
     "title": "Branch Update and Delete",
     "content": "Git Branch не умеет переносить ветку, на которой мы сейчас находимся . Reset Demystified . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20Update%20Delete.html"
-  },"48": {
+  },"55": {
     "doc": "Branch and Head Log",
     "title": "Git Branch [--list]",
     "content": "git branch Вывести список всех вершин веток. Делает то же что git branch --list . git branch -v Вывести список вершин веток с номерами коммитов, на которых они стоят . cat .git/refs/heads/master Показать номер коммита, на котором вершина master . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-branch---list",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-branch---list"
-  },"49": {
+  },"56": {
     "doc": "Branch and Head Log",
     "title": "Git RefLog",
     "content": "git reflog master Вывести историю движения вершины master git reflog --date=iso . Время жизни логов . gc.reflogExpire gc.reflogExpireUnreachable . ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-reflog",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20and%20Head%20Log.html#git-reflog"
-  },"50": {
+  },"57": {
     "doc": "Branch and Head Log",
     "title": "Branch and Head Log",
     "content": " ",
     "url": "/children/Git/children/4.%20Git%20Branch/Branch%20and%20Head%20Log.html",
     "relUrl": "/children/Git/children/4.%20Git%20Branch/Branch%20and%20Head%20Log.html"
-  },"51": {
+  },"58": {
     "doc": "Cantor Git",
     "title": "Примеры коммит-мессаджей",
     "content": ". | Примеры Commit Message разработчиков Git | jossbuchea - Semantic Commit Messages | Conventional Commits | Sparkbox - Semantic Commit Messages | Karma Git Commit Msg | . ",
     "url": "/children/Git/CantorGit.html#%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82-%D0%BC%D0%B5%D1%81%D1%81%D0%B0%D0%B4%D0%B6%D0%B5%D0%B9",
     "relUrl": "/children/Git/CantorGit.html#примеры-коммит-мессаджей"
-  },"52": {
+  },"59": {
     "doc": "Cantor Git",
     "title": "Cantor Git",
     "content": " ",
     "url": "/children/Git/CantorGit.html",
     "relUrl": "/children/Git/CantorGit.html"
-  },"53": {
+  },"60": {
     "doc": "Commit Create",
     "title": "Git Status",
     "content": "Показывает изменения Index vs Last Commit git status Показать все modified/untracked по отношению к предыдущему коммиту . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-status",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-status"
-  },"54": {
+  },"61": {
     "doc": "Commit Create",
     "title": "Git Add",
     "content": "git add . Добавить все untracked файлы в текущий коммит git add -A То же, но для тех ОС, где нет оператора точки git add src Добавить папку в текущий коммит git add index.md Добавить index.md в текущий коммит git add -p index.html index.md index.php git будет спрашивать что делать с каждым измененным файлом . Добавить файлы, которые под .gitignore: git add --force, git add -f . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-add",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-add"
-  },"55": {
+  },"62": {
     "doc": "Commit Create",
     "title": "Git Commit",
     "content": "git commit Отправить в репозиторий текущий коммит git commit --author='John Smith' &lt;john@me.com&gt; --date='...' Задать автора, дату git commit -m \"Text\" Закоммитить с сообщением “Text” . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commit",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commit"
-  },"56": {
+  },"63": {
     "doc": "Commit Create",
     "title": "Git Commit+Add",
     "content": "git commit -m 'Text' index.md Добавить изменения файла index.md в индекс, закоммитить с текстом Text. Работает только для tracked файлов. git commit -a Добавить в индекс все tracked файлы git commit -a -m 'Text' то же, добавить в индес все modified и закоммитить. git commit -am 'Text' -||- . Алиас для честного Git Add . вместе с Git Commit git config --global alias.commitall '!git add .;git commit' git config --global alias.commitall '!git add -A;git commit' Вызовы будут выглядеть: git commitall -m 'Text' ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commitadd",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commitadd"
-  },"57": {
+  },"64": {
     "doc": "Commit Create",
     "title": "Git Commit --amend Отмена одного последнего коммита",
     "content": "git commit --amend branchhead и HEAD вернутся на один коммит назад, и граф будет продолжаться оттуда. Первоначальный коммит будет в анонимной ветке. Эквивалентно git reset --soft @~;git commit Так же используется для изменения описания последнего коммита, без изменений в файлах. ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commit---amend-%D0%BE%D1%82%D0%BC%D0%B5%D0%BD%D0%B0-%D0%BE%D0%B4%D0%BD%D0%BE%D0%B3%D0%BE-%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B5%D0%B3%D0%BE-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%B0",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commit---amend-отмена-одного-последнего-коммита"
-  },"58": {
+  },"65": {
     "doc": "Commit Create",
     "title": "Git Commit -v",
     "content": " ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commit--v",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-commit--v"
-  },"59": {
+  },"66": {
     "doc": "Commit Create",
     "title": "Git Reset &lt;pathspec&gt;",
     "content": "git reset HEAD сбросить весь индекс текущего коммита git reset index.html удалить из индекс то, что было сделано git add index.html . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-reset-pathspec",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html#git-reset-pathspec"
-  },"60": {
+  },"67": {
     "doc": "Commit Create",
     "title": "Commit Create",
     "content": " ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Create.html"
-  },"61": {
+  },"68": {
     "doc": "Commit List",
     "title": "Git Reflog Show",
     "content": "git log --oneline -g показывает движения веток и HEAD он же git reflog show . Git blame . git blame index.html -L 5,8 . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20List.html#git-reflog-show",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20List.html#git-reflog-show"
-  },"62": {
+  },"69": {
     "doc": "Commit List",
     "title": "Commit List",
     "content": "6.3 вывод всего графа . Git Log: вывод списка коммитов . git log Показать все коммиты от HEAD вниз git log master Показать все коммиты от вершины master вниз git log --oneline номер, ветка, заголовок git log --follow index.html все коммиты, где менялся index.html git log --no-decorate Не показывать бранчхеды и HEAD git log --pretty=format:'%h %cd | %s%d [%an]' &lt;id коммита&gt; &lt;дата&gt; | &lt;заголовок&gt; &lt;декорирование(ссылки)&gt; [имя автора] . git log --pretty=format:'%C(yellow)%h %C(dim green)%ad %C(reset)| %C(cyan)%s%d %C(#667788)[%an]' --date=format:'%F %R' . Алиасы Алиас git lg git config --global alias.lg 'log --pretty=format:'%C(yellow)%h %C(dim green)%ad %C(reset)| %C(cyan)%s%d %C(#667788)[%an]' --date=format:'%F %R' Список коммитов от корня до коммита или бранчхеда: Git Log &lt;commit&gt; . git log master вывести все коммиты от корня до бранчхеда мастер git log master feature вывести все коммиты от корня до бранчхедов feautre и master . Список коммитов с regex-фильтром: Git Log –grep . Поиск по мессаджу git log --grep добавил найти слово коммиты со словом ‘добавил’ git log --grep добавил -i отключить регистрозависимость git log --grep добавил --grep удалил найти коммиты, где в мессадже есть или слово ‘добавил’ или слово ‘удалил’ git log --grep добавил --grep удалил --all-match найти коммиты, которые матчатся с обоими выражениями . Поиск по изменениям в файлах git log -G\"регулярноевыражения\" -p документация git log -L . git config --global grep.patternType perl Включить перловые regex . История изменений внутри файла между строчками regex1 и regex2: Git Log -L . git log -L '/&lt;head&gt;/','&lt;\\/head&gt;/':index.html история изменений внутри тега head в index.html . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20List.html",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20List.html"
-  },"63": {
+  },"70": {
     "doc": "Commit Read",
     "title": "Git Show",
     "content": "Показать всё, что изменил коммит Git Show &lt;коммит&gt; . Показывает изменения, сделанные коммитом git show Показать изменения, сделанные коммитом из HEAD git show 54a4 Показывать изменения, сделанные коммитом 54a4. git show --pretty=fuller . git show HEAD~ Показать все изменения сделанные родителем коммита HEAD То же что HEAD~1 то же что @~1 git show @~2 -- index.html Показать изменения в файле index.html в прародителе HEAD если были git show @~2:index.html Показать состояние index.html в прародителе HEAD . Показать состояние файла в коммите Git Show :&lt;файл&gt; . git show :index.html Показать состояние index.html в индексе текущего коммита . git show :\"текст\" Найти коммит по тексту “текст” коммита git show 68bd Показать коммит 68bd должно быть минимум четыре цифры . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-show",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-show"
-  },"64": {
+  },"71": {
     "doc": "Commit Read",
     "title": "Git Ls-Files",
     "content": "Делает то же что и ls, но позволяет фильтровать git ls-files – :!:*.md Показать все файлы без .md . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-ls-files",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-ls-files"
-  },"65": {
+  },"72": {
     "doc": "Commit Read",
     "title": "Git Diff &lt;commit1&gt; &lt;commit2&gt;",
     "content": "git diff master..feature То же что и пробел. Дифф между коммитами, на которых стоят бранчхеды. git diff master...feature Дифф feature с последним общим коммитом веток git diff e2e4 e4e2 Дифф e4e2 с e2e4 git diff e2e4 Сравнить WT с коммитом e2e4 git diff HEAD Как git status, только для содержимого файлов git diff -- index.html Сравнить версию из working directory с последним коммитом . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1-commit2",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1-commit2"
-  },"66": {
+  },"73": {
     "doc": "Commit Read",
     "title": "Git Diff --cached",
     "content": "Сравнить staging с указанным коммитом git diff --cached Сравнить staging с HEAD Git diff не показывает untracked файлы . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff---cached",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff---cached"
-  },"67": {
+  },"74": {
     "doc": "Commit Read",
     "title": "Git diff [-- index.md] (вообще без номеров коммитов в параметрах)",
     "content": "Сравнивает WT vs Staging . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff----indexmd-%D0%B2%D0%BE%D0%BE%D0%B1%D1%89%D0%B5-%D0%B1%D0%B5%D0%B7-%D0%BD%D0%BE%D0%BC%D0%B5%D1%80%D0%BE%D0%B2-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%BE%D0%B2-%D0%B2-%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D0%B0%D1%85",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff----indexmd-вообще-без-номеров-коммитов-в-параметрах"
-  },"68": {
+  },"75": {
     "doc": "Commit Read",
     "title": "Git diff &lt;один коммит&gt;",
     "content": "WT vs Коммит git diff @ . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff-%D0%BE%D0%B4%D0%B8%D0%BD-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff-один-коммит"
-  },"69": {
+  },"76": {
     "doc": "Commit Read",
     "title": "Git Diff --name-only master feature",
     "content": " ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff---name-only-master-feature",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff---name-only-master-feature"
-  },"70": {
+  },"77": {
     "doc": "Commit Read",
     "title": "Git diff commit1:path1 commit2:path2",
     "content": " ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1path1-commit2path2",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html#git-diff-commit1path1-commit2path2"
-  },"71": {
+  },"78": {
     "doc": "Commit Read",
     "title": "Commit Read",
     "content": "@ index.html изменения index.html из HEAD @~1,@~,HEAD~,HEAD~1 изменения index.html из родителя HEAD :index.html index.html из индекса текущего коммита :/text Поиск по тексту . ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Read.html"
-  },"72": {
+  },"79": {
     "doc": "Commit Update",
     "title": "Commit Update",
     "content": " ",
     "url": "/children/Git/children/2.%20Git%20Commits/Commit%20Update.html",
     "relUrl": "/children/Git/children/2.%20Git%20Commits/Commit%20Update.html"
-  },"73": {
+  },"80": {
     "doc": "Configuration",
     "title": "Конфигурация Git",
     "content": "Задать имя и почту в репозитории локально (в файле .git/config) . git config user.name \"Name Surname\" git config user.email mail@example.com cat .git/config Вывест конфиг текущей папки (через cat) git config --list Вывести конфиг репозитория текущей папки (через git) Удалить из репозитория текущей папки имя и почту: git config --unset user.name git config --unset user.email git config --remove-section user . Задать имя и почту глобально . git config --global user.name \"...\" git config --global user.email \"...\" git config --system core.autocrlf true Найстроить лайн-брейки на уровне системы cat ~/.gitconfig Вывести глобальный конфиг (через cat) git config --list --global Вывести глобальный конфиг (через git) git config --global -e Открыть конфиг в редакторе по умолчанию . git config --global core.editor /Applications/Sublime\\ Текстовый редактор по умолчанию Примеры для разных редакторов git config --global core.editor \"code --wait\" VsCode . Каскад от более к менее приоритетному: . --local ↓ --global ↓ --system . Алиасы git . git config --global alias.c 'config --global' git c вместо git config --global . ",
     "url": "/children/Git/children/6.%20Git%20Configuration/Configuration.html#%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B3%D1%83%D1%80%D0%B0%D1%86%D0%B8%D1%8F-git",
     "relUrl": "/children/Git/children/6.%20Git%20Configuration/Configuration.html#конфигурация-git"
-  },"74": {
+  },"81": {
     "doc": "Configuration",
     "title": "Git Help",
     "content": "git config -h помощь git help config помощь по git config . ",
     "url": "/children/Git/children/6.%20Git%20Configuration/Configuration.html#git-help",
     "relUrl": "/children/Git/children/6.%20Git%20Configuration/Configuration.html#git-help"
-  },"75": {
+  },"82": {
     "doc": "Configuration",
     "title": "Configuration",
     "content": " ",
     "url": "/children/Git/children/6.%20Git%20Configuration/Configuration.html",
     "relUrl": "/children/Git/children/6.%20Git%20Configuration/Configuration.html"
-  },"76": {
+  },"83": {
     "doc": "Dotnet & More",
     "title": "Dotnet & More",
     "content": "#29 DDD . | Паттерны на собесе: GOF, GRASP, Martin Fowler Enterprise Patterns Видео с минутами | Алгоритмы: Задачи на разворот linked list | Книга по DDD Vaugh Vernon: Implementing Domain Driven Design | Jetbrains собес: Алгоритмы, Многопоточночность, книги Танненбаума | . #31 Многопоточность посмотреть позже . #32 Интервью на английском . ",
     "url": "/children/dotnet/DotnetMore.html",
     "relUrl": "/children/dotnet/DotnetMore.html"
-  },"77": {
+  },"84": {
     "doc": "Github Actions Minin",
     "title": "Github Actions React",
     "content": "git remote add origin https://github.com/aq-coding/github-actions-react.git git push -u master . Создать руками папку .github/workflows Создать руками testing.yml . Marketplace: Actions . Marketplace/Actions Use the latest version Скопировать . - name: Checkout uses: actions/checkout@v2.6.0 . Несколько джобов параллельно . name: Test React App # Триггер на каждый новый залив on: push jobs: test: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm install - name: Test application run: npm run test lint: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run lint build: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run build - name: Deploy run: echo Deploying... Сначала test, потом lint, потом build . name: Test React App # Триггер на каждый новый залив on: push jobs: test: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm install - name: Test application run: npm run test lint: runs-on: ubuntu-latest needs: test steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run lint build: runs-on: ubuntu-latest needs: lint steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run build - name: Deploy run: echo Deploying... ",
     "url": "/children/Github%20Actions/grandchildren/GHA%20Minin%201.html#github-actions-react",
     "relUrl": "/children/Github%20Actions/grandchildren/GHA%20Minin%201.html#github-actions-react"
-  },"78": {
+  },"85": {
     "doc": "Github Actions Minin",
     "title": "Github Actions Minin",
     "content": "Создание репозитория . index.html . git init git add . git commit -m \"init\" . Создать на гитхабе репозиторий github-actions git remote add origin https://github.com/aq-coding/github-actions.git git push -u origin master . Если не работает git push: git remote set-url origin https://новый_токен@github.com/aq-coding/github-actions.git git push -u origin master . Страница создания workflow . https://github.com/aq-coding/github-actions/actions/new . Выбрать set up a workflow yourself github-actions./github/workflows/demo.yml in master . #Имя любое name: Demo Workflow #on какое событие слушать # Ctrl + space список ивентов on: workflow_dispatch jobs: #Имя работы любое print: # Выбор раннера runs-on: ubuntu-latest # Внутри джоба print расписываем шаги: steps: #Имя шага - name: Print to console run: echo Hello GH Actions! . Запуск workflow demo.yml . Actions &gt; Demo Workflow https://github.com/aq-coding/github-actions/actions/workflows/demo.yml Run Workflow . Отработавшие workflows . Actions &gt; All Workflows https://github.com/aq-coding/github-actions/actions . Изменить workflow . Actions &gt; Demo Workflow View workflow file . ",
     "url": "/children/Github%20Actions/grandchildren/GHA%20Minin%201.html",
     "relUrl": "/children/Github%20Actions/grandchildren/GHA%20Minin%201.html"
-  },"79": {
+  },"86": {
     "doc": "Github Actions Minin 2",
     "title": "Github Actions React",
     "content": "git remote add origin https://github.com/aq-coding/github-actions-react.git git push -u master . Создать руками папку .github/workflows Создать руками testing.yml . Marketplace: Actions . Marketplace/Actions Use the latest version Скопировать . - name: Checkout uses: actions/checkout@v2.6.0 . Несколько джобов параллельно . name: Test React App # Триггер на каждый новый залив on: push jobs: test: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm install - name: Test application run: npm run test lint: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run lint build: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run build - name: Deploy run: echo Deploying... Сначала test, потом lint, потом build . name: Test React App # Триггер на каждый новый залив on: push jobs: test: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm install - name: Test application run: npm run test lint: runs-on: ubuntu-latest needs: test steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run lint build: runs-on: ubuntu-latest needs: lint steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run build - name: Deploy run: echo Deploying... Последовательно, в одном джобе . name: Test React App on: push jobs: deploy: runs-on: ubuntu-latest steps: - name: Get repository code uses: actions/checkout@v2.6.0 - name: Install dependencies run: npm ci - name: Test application run: npm run test - name: Lint application run: npm run lint - name: Build application run: npm run build - name: Deploy run: echo Deploying... ",
     "url": "/children/Github%20Actions/grandchildren/GHA%20Minin%202.html#github-actions-react",
     "relUrl": "/children/Github%20Actions/grandchildren/GHA%20Minin%202.html#github-actions-react"
-  },"80": {
+  },"87": {
     "doc": "Github Actions Minin 2",
     "title": "Github Actions Minin 2",
     "content": " ",
     "url": "/children/Github%20Actions/grandchildren/GHA%20Minin%202.html",
     "relUrl": "/children/Github%20Actions/grandchildren/GHA%20Minin%202.html"
-  },"81": {
+  },"88": {
     "doc": "Github Actions Minin 3",
     "title": "Github Actions Minin 3",
     "content": "Contexts &amp; Expressions . В папка .github/workflows создать pull_request.yml . Объект контекста, который называется {{github}} . pull_request.yml . name: Print Pull Request Context #Запуск либо по кнопке либо по пулл-реквесту on: workflow_dispatch: pull_request: types: [opened, edited, reopened] jobs: print: runs-on: ubuntu-latest steps: - name: Print context run: echo $\"{{ toJSON(github.event) }}\" . Зауск только при пуше в master или изменения в какой-то папке . deployment.yaml . on: push: branches: 'master' paths: - '**.js' jobs: . Pull request, . Перейти на вкладку Pull Requests . Выбрать New pull Request . Выбрать base:master &lt;- compare:dev . Выбрать Create pull Request . paths-ignore . Не выполнять джоб если изменения в определенных файлах . on: push: paths-ignore: - '.github/workflows/*' . Marketplace: Cache . uses: actions/cache@v3 . steps: - name: Get repository code uses: actions/checkout@v3 - name: Cache deps uses: actions/cache@v3 with: path: ~/.npm key: node-modules-deps - name: Install dependencies run: npm ci - name: Lint application run: npm run lint . В key можно считать хэш с lock-файла key: node-modules-${{ hashFiles(‘**/package-lock.json’) }} . Матрицы . Параллельно протестировать билды на 14 и 16 ноде и на ubuntu-latest и на windows . strategy: matrix: node-version: [14, 16] os: [ubuntu-latest, windows-latest] . После этого в runs-on можно записать: . runs-on: ${{ matrix.os }} . steps: . | name: Install Node Js uses: actions/setup-node@v3 with: node-version: ${{ matrix.node-version }} | . Разрешить продолжать работаеть если один из элементов матрицы закончился с ошибкой: . build: continue-on-error: true . ",
     "url": "/children/Github%20Actions/grandchildren/GHA%20Minin%203.html",
     "relUrl": "/children/Github%20Actions/grandchildren/GHA%20Minin%203.html"
-  },"82": {
+  },"89": {
     "doc": "Github Actions Minin 4",
     "title": "Github Actions Minin 4",
     "content": "Артифакты . Артифакты это билды и тест-репорты Существует отдельный экшн Upload a Build Artifact Download A Build Artifact . name: Build jobs: build: runs-on: ubuntu-latest steps: - name: Get code uses: actions/checkout@v3 - name: Install deps run: npm ci - name: Build project run: npm run build - name: Upload Artifact uses: actions/upload-artifact@v3 with: path: build name: build-files deploy: needs: build runs-on: ubuntu-latest steps: - name: Get build project uses: actions/download-artifact@v3 with: name: build-files . Environment, Секреты . name: Environment on: push: workflow_dispatch: env: NODE_ENV: production GH_SECRET: 42 jobs: build: runs-on: ubuntu-latest steps: - name: Print Env Build run: | echo \"${{ env.NODE_ENV}}\" echo \"${{ env.GH_SECRET}}\" deploy: runs-on: ubuntu-latest steps: - name: Print Env Deploy run: | echo \"${{ env.NODE_ENV }}\" echo \"${{ env.GH_SECRET }}\" . Секреты задаются в настройках репозитория. Один раз настроив, его уже нельзя будет прочитать. ",
     "url": "/children/Github%20Actions/grandchildren/GHA%20Minin%204.html",
     "relUrl": "/children/Github%20Actions/grandchildren/GHA%20Minin%204.html"
-  },"83": {
+  },"90": {
     "doc": "Git Flow",
     "title": "Git Flow",
     "content": "Ссылка . Git Flow . main release develop feature/1, feature/2, feature/3 bug/1, bug/2, bug/3 . | Две ветки: Main коммиты в нее делать нельзя Develop коммиты в них делать нельзя | Ветки, в которые делают коммиты Feature/Название_задачи Bug/Название_задачи | Из Feature и Bug коммиты попадают в Develop через Pull Request | Из Develop коммиты попадают в Release/R1 | Из Release попадают в Main. В Main на коммиты ставятся теги. | Иногда из Main созда Github FLow . Лучше подходит для микросервисов main feature . | . ",
     "url": "/children/Github/GitFlow.html",
     "relUrl": "/children/Github/GitFlow.html"
-  },"84": {
+  },"91": {
     "doc": "Github Actions Tutorials",
     "title": "Github Actions Tutorials",
     "content": " ",
     "url": "/children/Github%20Actions/Github%20Actions%20Minin.html",
     "relUrl": "/children/Github%20Actions/Github%20Actions%20Minin.html"
-  },"85": {
+  },"92": {
     "doc": "Github Actions Nana",
     "title": "Github Actions Nana",
     "content": "Github Actions: Docker Buind &amp; Push . Docker Build &amp; Push Actions . ",
     "url": "/children/Github%20Actions/GithubActionsNana.html",
     "relUrl": "/children/Github%20Actions/GithubActionsNana.html"
-  },"86": {
+  },"93": {
     "doc": "Head",
     "title": "Git Checkout",
     "content": "git checkout master Обновить WT до состояние ласт-коммита master. Поставить HEAD на master. Обычное переключение между ветками. git checkout @{-1},git checkout - Вернуть HEAD на предыдущее значение . git checkout 1913 перевести HEAD на коммит 1913(без ветки) - в состояние detached head. Исправляется через git checkout master &gt; git-cherry-pick . ",
     "url": "/children/Git/children/4.%20Head/Head.html#git-checkout",
     "relUrl": "/children/Git/children/4.%20Head/Head.html#git-checkout"
-  },"87": {
+  },"94": {
     "doc": "Head",
     "title": "История HEAD",
     "content": "cat .git/logs/HEAD git reflog без параметров показывает историю HEAD . ",
     "url": "/children/Git/children/4.%20Head/Head.html#%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%8F-head",
     "relUrl": "/children/Git/children/4.%20Head/Head.html#история-head"
-  },"88": {
+  },"95": {
     "doc": "Head",
     "title": "Head",
     "content": "Единственная команда, для того, чтобы двигать только HEAD: git checkout HEAD всегда должна стоять на вершине ветки и никогда на самом коммите. ",
     "url": "/children/Git/children/4.%20Head/Head.html",
     "relUrl": "/children/Git/children/4.%20Head/Head.html"
-  },"89": {
+  },"96": {
     "doc": "Jekyll just-the-docs",
     "title": "Jekyll just-the-docs",
     "content": "jobs: build: runs-on: ubuntu-latest steps: . GitHub Action: Checkout . - name: Checkout uses: actions/checkout@v3 . GitHub Action: Setup Ruby, JRuby and TruffleRuby . - name: Setup Ruby, JRuby and TruffleRuby uses: ruby/setup-ruby@v1.133.0 with: ruby-version: '3.1' bundler-cache: true . GitHub Action: Configure GitHub Pages . - name: Setup Pages id: pages uses: actions/configure-pages@v2.1.3 . RUN Сгенерить html-файлы в папку _site . - name: Build with Jekyll run: bundle exec jekyll build --baseurl \"$\" env: JEKYLL_ENV: production . GitHub Action: Upload GitHub Pages artifact Automatically uploads an artifact from the ‘./_site’ directory by default . - name: Upload GitHub Pages artifact uses: actions/upload-pages-artifact@v1.0.7 . ",
     "url": "/children/Github%20Actions/Jekyll%20just-the-docs.html",
     "relUrl": "/children/Github%20Actions/Jekyll%20just-the-docs.html"
-  },"90": {
+  },"97": {
     "doc": "Установка на Ubuntu",
     "title": "Установка на Ubuntu",
     "content": "Прямая ссылка на http://45.89.52.66:50101/login . Инструкция DigitalOcean Инструкция с оф сайта Jenkins . Проверить версии софта на сервере . cat /etc/os-release версия ОС . java -version версия Java. Должна быть 11 ? . sudo lsof -i:8080 занят ли порт 8080. Должен быть свободен. apt remove apache2 если там апач . grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* Показать sources.list . Репозиторий уже мог быть добавлен. More . Обновление локальных пакетов . sudo apt upgrade sudo apt update sudo apt install ca-certificates . Установка Java . Удалить всю старую джаву. More dpkg-query -W -f='${binary:Package}\\n' | grep -E -e '^(ia32-)?(sun|oracle)-java' -e '^openjdk-' -e '^icedtea' -e '^(default|gcj)-j(re|dk)' -e '^gcj-(.*)-j(re|dk)' -e '^java-common' | xargs sudo apt-get -y remove sudo apt-get -y autoremove . Установить с нуля Java 11 sudo apt-get install openjdk-11-jdk sudo apt-get install fontconfig . Добавить путь к Java nano /etc/environment Прописать JAVA_HOME=\"/usr/lib/jvm/java-1.11.0-openjdk-amd64\" source /etc/environment Перезагрузить echo $JAVA_HOME Проверить всё ли работает . Добавление репозитория jenkins-stable binary . wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add - Добавление ключа репозитория . sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ &gt; /etc/apt/sources.list.d/jenkins.list' Добавление в sources.list . Собственно установка . sudo apt install jenkins . UFW . Проверить, запущен ли UFW sudo ufw status . Ответ должен быть: Когда UFW включен, 8080 открыт, OpenSSH включен Status: active To Action From -- ------ ---- 8080 ALLOW Anywhere OpenSSH ALLOW Anywhere 8080 (v6) ALLOW Anywhere (v6) OpenSSH (v6) ALLOW Anywhere (v6) . Если пустые правила, надо открыть 8080 (Jenkins по умолчанию) и добавить OpenSSH sudo ufw allow 8080 sudo ufw allow OpenSSH sudo ufw enable . curl localhost:8080 должно работать netstat -ntulp | grep 8080 . Первый запуск . Прямая ссылка на http://45.89.52.66:50101/login cat /var/lib/jenkins/secrets/initialAdminPassword выставить. Установить Suggested. Настройка языка . http://45.89.52.66:50101/ Ctrl+F “Locale” Default Language: en Ignore browser preference . ",
     "url": "/children/Jenkins/grandchildren/JenkinsInstallOnUbuntu.html",
     "relUrl": "/children/Jenkins/grandchildren/JenkinsInstallOnUbuntu.html"
-  },"91": {
+  },"98": {
     "doc": "Jenkins Installation",
     "title": "Jenkins Installation",
     "content": " ",
     "url": "/children/Jenkins/JenkinsInstallation.html",
     "relUrl": "/children/Jenkins/JenkinsInstallation.html"
-  },"92": {
+  },"99": {
     "doc": "Jenkins Jobs Adv",
     "title": "Jenkins jobs",
     "content": "New Item Прямая ссылка на http://45.89.52.66:50101/newJob . ",
     "url": "/children/Jenkins/JenkinsJobsAdv.html#jenkins-jobs",
     "relUrl": "/children/Jenkins/JenkinsJobsAdv.html#jenkins-jobs"
-  },"93": {
+  },"100": {
     "doc": "Jenkins Jobs Adv",
     "title": "Adv1",
     "content": "Установить плагин Publish over SSH . Джоб 1 . New Item - Freestyle project Item name: MyJobNumber-1 Description: Adv1 first job . Разрешить выполнять несколько билдов одновременно: . | Execute concurent builds if necessary | . Удалять старые билды из папки cd /var/lib/jenkins/jobs/ИмяДжоба/builds : . | Discard old builds Обычно ставят max of builds to keep: 5 | . Build: Execute shell: . echo \"HelloWorld!\" echo \"This is Build number: $BUILD_NUMBER\" pwd sleep 5 whoami echo \"Name of this Build is: $BUILD_DISPLAY_NAME\" . Каждый запуск создает директорию в: . cd /var/lib/jenkins/jobs ll . Job 3 . New Item - Freestyle project Discard old builds: Max of builds: 5 . | Execute concurrent | . Build: Execute Shell: . echo \"==========Build Started==========\" cat &lt;&lt;EOF &gt;&gt; index.html &lt;html&gt; &lt;body bgcolor=black&gt; &lt;center&gt; &lt;h2&gt;&lt;font color=yellow&gt;Hello Job&lt;/font&gt;&lt;/h2&gt; &lt;font color=blue&gt;Job&lt;/font&gt; &lt;/center&gt; &lt;/body &lt;/html&gt; EOF echo \"==========Build Finished==========\" . Execute Shell: . echo \"==========Test Started==========\" result=`grep \"Hello\" index.html | wc -l` echo $result if [ \"$result\" = \"1\" ] then echo \"Test Passed\" exit 0 else echo \"Test Failed\" exit 1 fi echo \"==========Test Finished==========\" . Execute Shell: . echo \"==========Deployment Started==========\" . Post-build Action Send build artifacts over SSH: Source files /* Remote directory ` ` Exec command sudo service httpd restart . ",
     "url": "/children/Jenkins/JenkinsJobsAdv.html#adv1",
     "relUrl": "/children/Jenkins/JenkinsJobsAdv.html#adv1"
-  },"94": {
+  },"101": {
     "doc": "Jenkins Jobs Adv",
     "title": "Jenkins Jobs Adv",
     "content": " ",
     "url": "/children/Jenkins/JenkinsJobsAdv.html",
     "relUrl": "/children/Jenkins/JenkinsJobsAdv.html"
-  },"95": {
+  },"102": {
     "doc": "Jenkins Plugins",
     "title": "Publish over SSH",
     "content": "Добавление удаленного сервера . Manager Jenkins &gt; Configure Systems Publish over SSH . Key Name: Любое имя Hostname: ip-адрес Username: Remote directory: /var/www/html . Test Configurations . Настройки шага джоба . Post-build Action Send build artifacts over SSH: Source files /* Remote directory Exec command sudo service httpd restart . ",
     "url": "/children/Jenkins/JenkinsPlugins.html#publish-over-ssh",
     "relUrl": "/children/Jenkins/JenkinsPlugins.html#publish-over-ssh"
-  },"96": {
+  },"103": {
     "doc": "Jenkins Plugins",
     "title": "Jenkins Plugins",
     "content": " ",
     "url": "/children/Jenkins/JenkinsPlugins.html",
     "relUrl": "/children/Jenkins/JenkinsPlugins.html"
-  },"97": {
+  },"104": {
     "doc": "JenkinsSem",
     "title": "JenkinsSem",
     "content": " ",
     "url": "/children/Jenkins/JenkinsSem.html",
     "relUrl": "/children/Jenkins/JenkinsSem.html"
-  },"98": {
+  },"105": {
     "doc": "Manage Jenkins",
     "title": "Изменить цвет результата маркера билда",
     "content": "Green Balls не работает . ",
     "url": "/children/Jenkins/grandchildren/ManageJenkins.html#%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B8%D1%82%D1%8C-%D1%86%D0%B2%D0%B5%D1%82-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%B0-%D0%BC%D0%B0%D1%80%D0%BA%D0%B5%D1%80%D0%B0-%D0%B1%D0%B8%D0%BB%D0%B4%D0%B0",
     "relUrl": "/children/Jenkins/grandchildren/ManageJenkins.html#изменить-цвет-результата-маркера-билда"
-  },"99": {
+  },"106": {
     "doc": "Manage Jenkins",
     "title": "Manage Jenkins",
     "content": "Configure System . # of excutors: 4 Usage: только .net Jenkins URL: Поставить 8081 Usage Statistics: Отключить Save . Configure Global Security . Authorization: Logged-in users can do anything . | Allow anonymous read access | . Установка обновления . cd /usr/share/jenkins Скачать в эту папку sudo mv jenkins.war jenkins_новая_директория ll sudo service jenkins restart . ",
     "url": "/children/Jenkins/grandchildren/ManageJenkins.html",
     "relUrl": "/children/Jenkins/grandchildren/ManageJenkins.html"
-  },"100": {
+  },"107": {
     "doc": "Manage Plugins",
     "title": "Manage Plugins",
     "content": "Установка плагинов . http://45.89.52.66:50101/pluginManager/ http://45.89.52.66:50101/pluginManager/available/ При установка плагина желательно поставить галку . | Restart Jenkins when installation После установки плагина желательно делать sudo service jenkins restart | . ",
     "url": "/children/Jenkins/grandchildren/ManagePlugins.html",
     "relUrl": "/children/Jenkins/grandchildren/ManagePlugins.html"
-  },"101": {
+  },"108": {
     "doc": "Marketplace",
     "title": "Marketplace",
     "content": "Checkout . jobs: build: runs-on: ubuntu-latest steps: . - name: Checkout uses: actions/checkout@v3 . ",
     "url": "/children/Github%20Actions/Marketplace.html",
     "relUrl": "/children/Github%20Actions/Marketplace.html"
-  },"102": {
+  },"109": {
     "doc": "Merge",
     "title": "Merge",
     "content": "Fast-Forward . git merge fix Если ветка fix выше чем ветка ‘master’, на которой стоит HEAD - подвинет master вместе с HEAD на коммит fix. fix не удаляется. Дальше можно переместить HEAD на fix через git checkout fix . cat .git/ORIG_HEAD покажет id предыдущего положения HEAD git branch -f master ORIG_HEAD вернуть master где она была . Истинный мердж . Когда один бранчхед не входит в ветку другого. HEAD стоит на master, мердж с feature. git status должен быть пустой. git diff --name-only master feature покажет какие файлы различаются. git merge-base master feature покажет на каком коммите была развилка. git merge feature анализирует изменение в каждом файле. Пробует auto-merge . CONFLICT . Если мердж прервался cat .git/MERGE_HEAD покажет id коммита, с которым мы мерджились, но возник конфликт. git show e2e4:index.html git show master:index.html git show feature:index.html покажут версии файлов в разных бранчхедах. 7.1-7.2 . git checkout --ours git checkout --theirs git checkout --merge git merge --abort git checkout --conflict=diff3 --merge index.html git merge --continue . ",
     "url": "/children/Git/children/3.%20Git%20Merge/Merge.html",
     "relUrl": "/children/Git/children/3.%20Git%20Merge/Merge.html"
-  },"103": {
+  },"110": {
     "doc": "Putty",
     "title": "Putty",
     "content": "Для того чтобы не рвалось соединения в Connection поставить Seconds between keepalives 30 . ",
     "url": "/children/Ubuntu/Putty.html",
     "relUrl": "/children/Ubuntu/Putty.html"
-  },"104": {
+  },"111": {
     "doc": "Repository Create",
     "title": "Git Init",
     "content": "git init Создать репозиторий . ",
     "url": "/children/Git/children/5.%20Git%20Repository/Repository%20Create.html#git-init",
     "relUrl": "/children/Git/children/5.%20Git%20Repository/Repository%20Create.html#git-init"
-  },"105": {
+  },"112": {
     "doc": "Repository Create",
     "title": "Repository Create",
     "content": " ",
     "url": "/children/Git/children/5.%20Git%20Repository/Repository%20Create.html",
     "relUrl": "/children/Git/children/5.%20Git%20Repository/Repository%20Create.html"
-  },"106": {
+  },"113": {
     "doc": "TShock",
     "title": "TShock",
     "content": " ",
     "url": "/children/Ubuntu/TShock.html",
     "relUrl": "/children/Ubuntu/TShock.html"
-  },"107": {
+  },"114": {
     "doc": "UFW",
     "title": "UFW",
     "content": "https://askubuntu.com/questions/541675/ufw-is-blocking-all-even-when-i-set-rules-to-allow sudo ufw status verbose . sudo iptables -L -v -n Посмотреть iptables sudo nano /etc/default/ufw Конфигурация UFW (включить выключить IPV6=YES) sudo nano /etc/ufw/sysctl.conf Конфигурация UFW . ufw reset никогда не нажимать . ufw enable вкл ufw disable вкл ufw Reload . Базовая настройка UFW . Проверить чтобы стояло IPV6=yes . sudo nano /etc/default/ufw . Запретить все входящие, разрешить все исходящие . sudo ufw default deny incoming . sudo ufw default allow outgoing . Разрешить входящие ssh . sudo ufw allow ssh sudo ufw allow 500,4500/udp sudo ufw allow 7777/tcp sudo ufw allow 8080/tcp sudo ufw allow 9418/tcp sudo ufw allow 80/tcp sudo ufw allow 443/tcp . Включить . sudo ufw enable . Дальше . Если надо удалить правило: . sudo ufw status numbered . sudo ufw delete 2 . IKEV2 Восстановление . ip route show default . sudo ufw allow 500,4500/udp . sudo nano /etc/ufw/before.rules . Добавить перед *filter (интерфейс ens3) . *nat -A POSTROUTING -s 10.10.10.0/24 -o ens3 -m policy --pol ipsec --dir out -j ACCEPT -A POSTROUTING -s 10.10.10.0/24 -o ens3 -j MASQUERADE COMMIT *mangle -A FORWARD --match policy --pol ipsec --dir in -s 10.10.10.0/24 -o ens3 -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360 COMMIT . Добавить после #End required lines (секции *filters) . -A ufw-before-forward --match policy --pol ipsec --dir in --proto esp -s 10.10.10.0/24 -j ACCEPT -A ufw-before-forward --match policy --pol ipsec --dir out --proto esp -d 10.10.10.0/24 -j ACCEPT . Дальше . sudo nano /etc/ufw/sysctl.conf . В конец файла . net/ipv4/ip_forward=1 net/ipv4/conf/all/accept_redirects=0 net/ipv4/conf/all/send_redirects=0 net/ipv4/ip_no_pmtu_disc=1 . sudo systemctl restart strongswan-starter . Всё! . Проверка iptables . iptables -L -v -n . Поставить IPV6=NO а потом вернуть . sudo nano /etc/default/ufw . Удалить все правила UFW из iptables . for i in `iptables -L INPUT --line-numbers |grep '[0-9].*ufw' | cut -f 1 -d ' ' | sort -r `; do iptables -D INPUT $i ; done for i in `iptables -L FORWARD --line-numbers |grep '[0-9].*ufw' | cut -f 1 -d ' ' | sort -r `; do iptables -D FORWARD $i ; done for i in `iptables -L OUTPUT --line-numbers |grep '[0-9].*ufw' | cut -f 1 -d ' ' | sort -r `; do iptables -D OUTPUT $i ; done for i in `iptables -L | grep 'Chain .*ufw' | cut -d ' ' -f 2`; do iptables -X $i ; done . Грохнуть iptables . iptables -F . ",
     "url": "/children/Ubuntu/UFW.html#ufw",
     "relUrl": "/children/Ubuntu/UFW.html#ufw"
-  },"108": {
+  },"115": {
     "doc": "UFW",
     "title": "UFW",
     "content": "Выяснить почему не работает IPV6=yes . ",
     "url": "/children/Ubuntu/UFW.html",
     "relUrl": "/children/Ubuntu/UFW.html"
-  },"109": {
+  },"116": {
     "doc": "UbuntuConfig",
     "title": "UbuntuConfig",
     "content": "Базовая настройка UFW и IEv2 . sudo apt update sudo apt install strongswan strongswan-pki libcharon-extra-plugins libcharon-extauth-plugins . mkdir -p ~/pki/{cacerts,certs,private} chmod 700 ~/pki . Проверить чтобы стояло IPV6=yes . sudo nano /etc/default/ufw . Запретить все входящие, разрешить все исходящие . sudo ufw default deny incoming . sudo ufw default allow outgoing . Разрешить входящие ssh . sudo ufw allow ssh sudo ufw allow 500,4500/udp sudo ufw allow 7777/tcp sudo ufw allow 8080/tcp sudo ufw allow 9418/tcp sudo ufw allow 80/tcp sudo ufw allow 443/tcp . Включить . sudo ufw enable . ",
     "url": "/children/Ubuntu/UbuntuConfig.html",
     "relUrl": "/children/Ubuntu/UbuntuConfig.html"
-  },"110": {
+  },"117": {
     "doc": "Working Tree Update",
     "title": "Git Checkout -- &lt;pathspec&gt;",
     "content": "Используется для отката отдельных файлов до коммита. Всё, что после -- воспринимается как путь. git checkout e2e4 -- &lt;pathspec&gt; Откатывает состояние в WT файла до состояния в коммите e2e4, и сразу добавляет новое состояние файла в индекс. git reset -- &lt;pathspec&gt; Сбрасывает состояние файла в индексе до состояние в HEAD. ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-checkout----pathspec",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-checkout----pathspec"
-  },"111": {
+  },"118": {
     "doc": "Working Tree Update",
     "title": "Откат всей WT через Git Checkout &lt;branch&gt;. Перемещает HEAD",
     "content": "git checkout -f Отменить все изменения WT, отменить весь текущий коммит. untracked не трогает. git checkout -f HEAD То же самое. git checkout master Обновить WT до состояние ласт-коммита master. Поставить HEAD на master. git checkout --force master Игнорировать изменения в текущей WT, обновить WT до состояния ласт-коммита master. Поставить HEAD на master. ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#%D0%BE%D1%82%D0%BA%D0%B0%D1%82-%D0%B2%D1%81%D0%B5%D0%B9-wt-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-git-checkout-branch-%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D1%89%D0%B0%D0%B5%D1%82-head",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#откат-всей-wt-через-git-checkout-branch-перемещает-head"
-  },"112": {
+  },"119": {
     "doc": "Working Tree Update",
     "title": "Откат отдельных файлов до состояния коммита через Git Checkout",
     "content": "git checkout 54a4 -- index.html Откатить index.html до 54a4 + Добавить новую версию в индекс. То же что git checkout 54a4 index.html git reset -- index.html Отмена индексирования index.html, будет возвращен в состояние HEAD. git checkout @ index.html Откатить index.html до состояния коммита, на котором HEAD. git checkout @ -- index.html то же самое git checkout @~~~~ – Program.cs //Откатить Program.cs на 4 коммита назад git checkout @~4 git checkout - Переключиться на предыдующую ветку . ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#%D0%BE%D1%82%D0%BA%D0%B0%D1%82-%D0%BE%D1%82%D0%B4%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2-%D0%B4%D0%BE-%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F-%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82%D0%B0-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-git-checkout",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#откат-отдельных-файлов-до-состояния-коммита-через-git-checkout"
-  },"113": {
+  },"120": {
     "doc": "Working Tree Update",
     "title": "Git Rm",
     "content": "Удаляет файлы и папки в текущем коммите [и рабочей директории] git rm -r src Удалить и из рабочей директории из текущего коммита папку со всеми вложениями То же что rm -r src + git add src git rm -r --cached index.md Удалить src только из индекса, без рабочей директории git rm -f index.md Удалить файл. Игнорировать предупреждение, что он modified. ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-rm",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-rm"
-  },"114": {
+  },"121": {
     "doc": "Working Tree Update",
     "title": "Git Mv",
     "content": "Переименовать файл и в рабочей директории и в индексе текущего коммита git mv index.html index.md Переименовать index.html в index.md . ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-mv",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-mv"
-  },"115": {
+  },"122": {
     "doc": "Working Tree Update",
     "title": "Git Stash",
     "content": "git stash Сохраняет состояние WT. Использовать перед например git checkout. git stash pop Восстанавливает WT из стэша. ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-stash",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-stash"
-  },"116": {
+  },"123": {
     "doc": "Working Tree Update",
     "title": "Git Clean",
     "content": "Удаляет untracked git clean -d git clean -x git clean -f git clean -dxf . ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-clean",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html#git-clean"
-  },"117": {
+  },"124": {
     "doc": "Working Tree Update",
     "title": "Working Tree Update",
     "content": " ",
     "url": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html",
     "relUrl": "/children/Git/children/1.%20Git%20Working%20Tree/Working%20Tree%20Update.html"
-  },"118": {
+  },"125": {
     "doc": "Amichai",
     "title": "Создать проекты, добавить пакеты",
     "content": ". | Blank Solution . | Создать проекты . | src/ | src/Web (Empty .Net) | src/Presentation (Class Library) | src/Infrastructure (Class Library) | src/Application (Class Library) | src/Domain (Class Library) | requests (Shared Project) | docs (Shared Project) | . | Удалить везде Class1.cs . | Добавить везде референсы | . | Web | Presentation | Infrastructure | Application | . | Presentation | Web | Application | Domain | . | Infrastructure | Infrastructure |   |   | . | Application | Application |   |   | . ",
     "url": "/children/dotnet/amichai/amichai.html#%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D1%8B-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%8B",
     "relUrl": "/children/dotnet/amichai/amichai.html#создать-проекты-добавить-пакеты"
-  },"119": {
+  },"126": {
     "doc": "Amichai",
     "title": "Добавить файлы",
     "content": ". | Web - Contracts - v1 - Authentication - Requests - RegisterRequest.cs - LoginRequest.cs - Responses - SuccessResponse.cs - FailedResponse.cs - Posts - Requests - CreatePostRequest.cs - UpdatePostRequest.cs - Responses - PostResponse.cs - ApiRoutes.cs - Options - ApiSwaggerOptions.cs - DependencyInjection.cs | Presentation - Controllers - v1 - AuthenticationController.cs - PostsController.cs - TagsController.cs - ErrorController.cs | Infrastructure - Authentication - JwtSettings.cs - JwtTokenGenerator.cs - Persistence - UserRepository.cs - Services - DateTimeProvider.cs - DependencyInjection.cs | Application - Authentication - Commands - Register - RegisterCommand.cs - RegisterCommandHandler.cs - Common - AuthenticationResult.cs - Queries - Login - LoginQuery.cs - LoginQueryHandler.cs - Common - Interfaces - Authentication - IJwtTokenGenerator.cs - Services - IDateTimeProvider.cs - Persistence - IUserRepository.cs - DependencyInjection.cs | Domain - Entities - User.cs | . ",
     "url": "/children/dotnet/amichai/amichai.html#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D1%84%D0%B0%D0%B9%D0%BB%D1%8B",
     "relUrl": "/children/dotnet/amichai/amichai.html#добавить-файлы"
-  },"120": {
+  },"127": {
     "doc": "Amichai",
     "title": "Добавить пакеты",
     "content": "| Presentation | Infrastructure | Application |———–|—————-|————-| System.Configuration.ConfigurationManager | Microsoft.Extensions.Configuration | Microsoft.Extensions.DependencyInjection |Swashbuckle.AspNetCore | Microsoft.Extensions.Options.ConfigurationExtension |MediatR| Microsoft.AspNetCore.Identity.EntityFrameworkCore | Microsoft.EntityFrameworkCore.SqlServer | MediatR.Extensions.Microsoft.DependencyInjection | - | Microsoft.EntityFrameworkCore.Tools | - | - | Microsoft.AspNetCore.Identity.EntityFrameworkCore | - | - | System.IdentityModel.Tokens.Jwt | - | . ",
     "url": "/children/dotnet/amichai/amichai.html#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D1%8B",
     "relUrl": "/children/dotnet/amichai/amichai.html#добавить-пакеты"
-  },"121": {
+  },"128": {
     "doc": "Amichai",
     "title": "Код",
     "content": "Dependency Injection . Web/DependencyInjection.cs . public static IServiceCollection AddPresentation(this IServiceCollection services) { services.AddIdentity&lt;IdentityUser, IdentityRole&gt;(options =&gt; { options.Password.RequireDigit = false; options.Password.RequireNonAlphanumeric = false; options.Password.RequireUppercase = false; options.Password.RequiredLength = 6; }) .AddRoles&lt;IdentityRole&gt;() .AddEntityFrameworkStores&lt;ApplicationDbContext&gt;(); services.AddSwaggerGen(x =&gt; { x.SwaggerDoc(\"v1\", new Microsoft.OpenApi.Models.OpenApiInfo {Title=\"My Api\", Version=\"v1\" }); }); return services; } . Infrastructure/DependencyInjection.cs ``` csharp public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager config) { return services; } ``` Application/DependencyInjection.cs ```csharp public static IServiceCollection AddApplication(this IServiceCollection services) { services.AddMediatR(typeof(DependencyInjection).Assembly); return services; } ``` Web/Program.cs ```csharp var builder = WebApplication.CreateBuilder(args); { builder.Services.AddApplication(); builder.Services.AddInfrastructure(builder.Configuration); builder.Services.AddPresentation(); builder.Services.AddControllers(); } var app = builder.Build(); { app.UseHttpsRedirection(); Assembly presentationAssembly = typeof(Presentation.AssemblyReference).Assembly; app.MapControllers().AddApplicationPart(presentationAssembly); app.Run(); } ``` DateTime Provider . Application . Common/Services/IDateTimeProvider.cs ```csharp public interface IDateTimeProvider { DateTime UtcNow { get; } } ``` Infrastructure . Services/DateTimeProvider.cs ```csharp public class DateTimeProvider : IDateTimeProvider { public DateTime UtcNow =&gt; DateTime.UtcNow; } ``` DependencyInjection.cs Добавить ```csharp services.AddSingleton&lt;IDateTimeProvider, DateTimeProvider&gt;(); ``` DbContext &amp; Unit of Work . Web . appsettings.json ```json \"ConnectionStrings\": { \"DefaultConnection\": \"Data Source=(localdb)\\\\MSSQLLocalDB;Initial Catalog=Portfolio2022;Integrated Security=True; Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False\" } ``` Infrastructure . Persistence/ApplicationDbContext.cs ```csharp public class ApplicationDbContext : IdentityDbContext { public ApplicationDbContext(DbContextOptions options) : base(options) { } public DbSet Users { get; set; } public DbSet Posts { get; set; } } ``` &lt;/details&gt; Persistence/UnitOfWork.cs ```csharp public sealed class UnitOfWork : IUnitOfWork { private readonly ApplicationDbContext _ctx; public UnitOfWork(ApplicationDbContext ctx) { _ctx = ctx; } public Task SaveChangesAsync(CancellationToken cancellationToken = default) { return _ctx.SaveChangesAsync(cancellationToken); } } ``` DependencyInjection.cs ```csharp public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration) { services.AddDbContext(options =&gt; options.UseSqlServer(configuration[\"DefaultConnection\"])); } ``` &lt;/details&gt; **Application** Persistence/IUnitOfWork.cs ```csharp ``` ### Identity **Web** Program.cs ```csharp var builder = WebApplication.CreateBuilder(args); { builder.Services.AddIdentity&lt;IdentityUser, IdentityRole&gt;(options =&gt; { options.Password.RequireDigit = false; options.Password.RequireNonAlphanumeric = false; options.Password.RequireUppercase = false; options.Password.RequiredLength = 6; }) .AddRoles() .AddEntityFrameworkStores(); } var app = builder.Build(); { { IServiceScope scope = app.Services.CreateScope(); ApplicationDbContext ctx = scope.ServiceProvider.GetRequiredService(); UserManager userManager = scope.ServiceProvider.GetRequiredService&lt;UserManager&gt;(); RoleManager roleManager = scope.ServiceProvider.GetRequiredService&lt;RoleManager&gt;(); ctx.Database.EnsureCreated(); IdentityRole adminRole = new IdentityRole(\"Admin\"); if (!ctx.Roles.Any()) { roleManager.CreateAsync(adminRole).GetAwaiter().GetResult(); } if (!ctx.Users.Any(u =&gt; u.UserName == \"admin\")) { IdentityUser adminUser = new IdentityUser { UserName = \"admin\", Email = \"admin@example.com\" }; userManager.CreateAsync(adminUser, \"P@ssword123!\").GetAwaiter().GetResult(); userManager.AddToRoleAsync(adminUser, adminRole.Name).GetAwaiter().GetResult(); } } } ``` &lt;/details&gt; ### User Repository **Domain** Aggregates/User.cs ```csharp public class User { public Guid Id { get; set; } = Guid.NewGuid(); public string FirstName { get; set; } = null!; public string LastName { get; set; } = null!; public string Email { get; set; } = null!; public string Password { get; set; } = null!; } ``` **Application** Persistence/IUserRepository.cs ```csharp public interface IUserRepository { User? GetUserByEmail(string email); void Add(User user); } ``` **Infrastructure** Persistence/UserRepository.cs ```csharp public class UserRepository : IUserRepository { private static readonly List _users = new(); public User? GetUserByEmail(string email) { return _users.SingleOrDefault(u =&gt; u.Email == email); } public void Add(User user) { _users.Add(user); } } ``` &lt;/details&gt; DependencyInjection.cs ```csharp public static class DependencyInjection { public static IServiceCollection AddInfrastructure(this IServiceCollection services) { services.AddScoped&lt;IUserRepository, UserRepository&gt;(); return services; } } ``` ### Post Repository **Domain** Entities/Post.cs ```csharp public class Post : Entity { public DateTime CreationDate { get; set; } public string Author { get; set; } public string Title { get; set; } public string Content { get; set; } public DateTime? DisplayUntil { get; set; } public string UserId { get; set; } public virtual ICollection Tags { get; set; } } ``` &lt;/details&gt; Entities/Tag.cs ```csharp public class Tag : Entity { public string Text { get; set; } public int? PostId { get; set; } [ForeignKey(nameof(PostId))] public Post Post { get; set; } } ``` &lt;/details&gt; Entities/IPostService.cs ```csharp public interface IPostService : ITweetbookAppService&lt;Post,int&gt; { Task&lt;IEnumerable&gt; GetTagsByPostAsync(int postId); Task CreatePostTagAsync(Tag tag); } ``` &lt;/details&gt; Entities/PostService.cs ```csharp public class PostService : TweetbookAppService, IPostService { //private readonly IHttpContextAccessor _httpContextAccessor; //public PostService(DataContext dataContext, IHttpContextAccessor httpContextAccessor) : base(dataContext) //{ // _httpContextAccessor = httpContextAccessor; //} public PostService(DataContext dataContext) : base(dataContext) {} public override async Task UpdateAsync(Post item) { CheckInstanceAvailability(); var itemToUpdate = await GetByIdAsync(item.Id); if (itemToUpdate == null) return await Task.FromResult(false); //The infrastructure evaluates for us via PostOwnershipValidationFilter where applied //But what if the developer forgets to decorate the endpoint with the attribute aforementioned? //In this case, uncomment the line below or adopt a better coding strategy* //if (!CurrentUserIsOwner(itemToUpdate.UserId)) // return await Task.FromResult(false); //*throw new SecurityException(\"Access denied to the request resource or operation\") //DataContext.Set().Update(item); //See next line below //https://stackoverflow.com/questions/7106211/entity-framework-why-explicitly-set-entity-state-to-modified item.UserId = itemToUpdate.UserId; DataContext.Entry(itemToUpdate).CurrentValues.SetValues(item); var updated = await DataContext.SaveChangesAsync() &gt; 0; return await Task.FromResult(updated); } public override async Task RemoveAsync(int id) { CheckInstanceAvailability(); var itemToRemove = await GetByIdAsync(id); if (itemToRemove != null) { //The infrastructure evaluates for us via PostOwnershipValidationFilter where applied //But what if the developer forgets to decorate the endpoint with the attribute aforementioned? //In this case, uncomment the line below or adopt a better coding strategy* //if (!CurrentUserIsOwner(itemToRemove.UserId)) // return await Task.FromResult(false); //*throw new SecurityException(\"Access denied to the request resource or operation\") DataContext.Entry(itemToRemove).State = EntityState.Deleted; await DataContext.SaveChangesAsync(); } return await Task.FromResult(true); } public async Task&lt;IEnumerable&gt; GetTagsByPostAsync(int postId) { //TODO: Implement get tags by post id method CheckInstanceAvailability(); return await Task.FromResult(Enumerable.Empty()); } public async Task CreatePostTagAsync(Tag tag) { CheckInstanceAvailability(); var relatedPost = await GetByIdAsync(tag.PostId.Value); if (relatedPost != null) { await DataContext.Tags.AddAsync(tag); var created = await DataContext.SaveChangesAsync() &gt; 0; return await Task.FromResult(created ? tag : null); } return await Task.FromResult((Tag)null); } //The infrastructure evaluates for us via PostOwnershipValidationFilter where applied //private bool CurrentUserIsOwner(string postUserId) =&gt; string.Equals(_httpContextAccessor.HttpContext.GetCurrentUserId(), postUserId, StringComparison.Ordinal); } ``` &lt;/details&gt; Entities/IAppService.cs ```csharp public interface ITweetbookAppService&lt;T, TKey&gt; where T : class { Task GetByIdAsync(TKey id); Task&lt;IEnumerable&gt; GetAllAsync(); Task CreateAsync(T item); Task UpdateAsync(T item); Task RemoveAsync(TKey id); } ``` &lt;/details&gt; Entities/AppService.cs ```csharp public abstract class TweetbookAppService : ITweetbookAppService&lt;T, int&gt; where T : Entity { protected DataContext DataContext { get; private set; } public TweetbookAppService(DataContext dataContext) { DataContext = dataContext; } public async virtual Task&lt;IEnumerable&gt; GetAllAsync() { CheckInstanceAvailability(); return await Task.FromResult(DataContext.Set().ToImmutableList()); } public async virtual Task GetByIdAsync(int id) { CheckInstanceAvailability(); return await DataContext.Set().FirstOrDefaultAsync(it =&gt; it.Id == id); } public async virtual Task CreateAsync(T item) { CheckInstanceAvailability(); await DataContext.Set().AddAsync(item); var created = await DataContext.SaveChangesAsync() &gt; 0; return await Task.FromResult(created); } public async virtual Task RemoveAsync(int id) { CheckInstanceAvailability(); var itemToRemove = await GetByIdAsync(id); if (itemToRemove != null) { DataContext.Entry(itemToRemove).State = EntityState.Deleted; await DataContext.SaveChangesAsync(); } return await Task.FromResult(true); } public async virtual Task UpdateAsync(T item) { CheckInstanceAvailability(); //DataContext.Set().Update(item); var itemToUpdate = await DataContext.Set().SingleOrDefaultAsync(it =&gt; it.Id == item.Id); if (itemToUpdate == null) return await Task.FromResult(false); //https://stackoverflow.com/questions/7106211/entity-framework-why-explicitly-set-entity-state-to-modified DataContext.Entry(itemToUpdate).CurrentValues.SetValues(item); var updated = await DataContext.SaveChangesAsync() &gt; 0; return await Task.FromResult(updated); } #region IDisposable Support private bool disposedValue = false; // To detect redundant calls protected virtual void Dispose(bool disposing) { if (!disposedValue) { if (disposing) { if (DataContext != null) DataContext.Dispose(); } // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below. // TODO: set large fields to null. disposedValue = true; } } ~TweetbookAppService() { Dispose(false); } public void Dispose() { Dispose(true); GC.SuppressFinalize(this); } #endregion protected void CheckInstanceAvailability() { if (disposedValue) throw new ObjectDisposedException(\"This service instance was disposed and is no longer available!\"); } } ``` &lt;/details&gt; ### Authentication **Web** Contracts/v1/Authentication/Requests/RegisterRequest.cs ```csharp public record RegisterRequest( string FirstName, string LastName, string Email, string Password); ``` Contracts/v1/Authentication/Requests/LoginRequest.cs ```csharp public record LoginRequest( string Email, string Password); ``` Contracts/v1/Authentication/Responses/SuccessResponse.cs ```csharp public record SuccessResponse( Guid Id, string FirstName, string LastName, string Email, string Token); ``` Contracts/v1/Authentication/Responses/FailedResponse.cs ```csharp public class FailedResponse { } ``` **Application** Authentication/Common/AuthenticationResult.cs ```csharp public record AuthenticationResult( User User, string Token); ``` Authentication/Commands/Register/RegisterCommand.cs ```csharp public record RegisterCommand( string FirstName, string LastName, string Email, string Password) : IRequest; ``` &lt;/details&gt; Authentication/Commands/Register/RegisterCommandHandler.cs ```csharp public class RegisterCommandHandler : IRequestHandler&lt;RegisterCommand, AuthenticationResult&gt; { private readonly IJwtTokenGenerator _jwttokengenerator; private readonly IUserRepository _userRepository; public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository) { _jwttokengenerator = jwtTokenGenerator; _userRepository = userRepository; } public async Task Handle(RegisterCommand command, CancellationToken cancellationToken) { if (_userRepository.GetUserByEmail(command.Email) is not null) { throw new Exception(\"User with given email already exists\"); } var user = new User { FirstName = command.FirstName, LastName = command.LastName, Email = command.Email, Password = command.Password }; _userRepository.Add(user); Guid userId = Guid.NewGuid(); var token = _jwttokengenerator.GenerateToken(user); return new AuthenticationResult( user, token); } } ``` &lt;/details&gt; Authentication/Queries/Login/LoginQuery.cs ```csharp public record LoginQuery(string Email, string Password) : IRequest; ``` &lt;/details&gt; Authentication/Queries/Login/LoginQueryHandler.cs ```csharp public class LoginQueryHandler : IRequestHandler&lt;LoginQuery, AuthenticationResult&gt; { private readonly IJwtTokenGenerator _jwttokengenerator; private readonly IUserRepository _userRepository; public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository) { _jwttokengenerator = jwtTokenGenerator; _userRepository = userRepository; } public async Task Handle(LoginQuery query, CancellationToken cancellationToken) { if (_userRepository.GetUserByEmail(query.Email) is not User user) { throw new Exception(\"User with given email does not exist\"); } if (user.Password != query.Password) { throw new Exception(\"Invalid password\"); } var token = _jwttokengenerator.GenerateToken(user); return new AuthenticationResult( user, token); } } ``` &lt;/details&gt; **Presentation** Controllers/v1/AuthenticationController.cs ```csharp [ApiController] [Route(\"auth\")] public class AuthenticationController : ControllerBase { private readonly ISender _mediator; public AuthenticationController( IMediator mediator) { _mediator = mediator; } [HttpPost(\"register\")] public async Task Register(RegisterRequest request) { var command = new RegisterCommand(request.FirstName, request.LastName, request.Email, request.Password); var authResult = await _mediator.Send(command); var authResponse = new SuccessResponse( authResult.User.Id, authResult.User.FirstName, authResult.User.LastName, authResult.User.Email, authResult.Token); return Ok(request); } [HttpPost(\"login\")] public async Task Login(LoginRequest request) { var query = new LoginQuery(request.Email, request.Password); var authResult = await _mediator.Send(query); var authResponse = new SuccessResponse( authResult.User.Id, authResult.User.FirstName, authResult.User.LastName, authResult.User.Email, authResult.Token); return Ok(request); } } ``` &lt;/details&gt; ### Swagger **Web** appsettings.Development ```json \"ApiSwaggerOptions\": { \"JsonRoute\": \"swagger/{documentName}/swagger.json\", \"Description\": \"Our API\", \"UIEndpoint\": \"v1/swagger.json\" } ``` Options/ApiSwaggerOptions.cs ```csharp public record ApiSwaggerOptions( string JsonRoute = null!, string UiEndpoint = null!, string Description = null!); ``` DependencyInjection.cs ```csharp services.AddSwaggerGen(x =&gt; { x.SwaggerDoc(\"v1\", new Microsoft.OpenApi.Models.OpenApiInfo { Title = \"Api\", Version = \"v1\" }); }); ``` Program.cs Добавить ```csharp var swaggerOptions = new ApiSwaggerOptions(); builder.Configuration.GetSection(nameof(ApiSwaggerOptions)) .Bind(swaggerOptions); app.UseSwagger(option =&gt; { option.RouteTemplate = swaggerOptions.JsonRoute; }); app.UseSwaggerUI(option =&gt; { option.SwaggerEndpoint(swaggerOptions.UiEndpoint, swaggerOptions.Description); }); ``` ### JWT ## Тесты - Создать проекты - tests/ - tests/**Architecture.Tests** ## Другое - В корне создать dockerfile ```dockerfile FROM httpd:alpine COPY ./html/ /usr/local/apache2/htdocs/ ``` - Докер bash-команды `docker images` `docker build -t hello-docker:1.0.0 .` - http-запросы VS Code **requests**/Authentication/Register.http ```http @host=https://localhost:7056 POST /auth/register Content-type: application/json { \"firstName\": \"Anton\", \"lastName\": \"K\", \"email\": \"ak@example.com\", \"password\": \"P@ssword123!\" } ``` **requests**/Authentication/Login.http ```http @host=https://localhost:7056 POST /auth/login Content-type: application/json { \"email\": \"ak@example.com\", \"password\": \"P@ssword123!\" } ``` - Установка сервисов ASP.NET через Assembly IInstaller.cs ```csharp public interface IInstaller { void InstallServices(IServiceCollection services, IConfiguration configuration); } ``` InstallerExtensions.cs ```csharp public static class InstallerExtensions { //Вызвать в services Program.cs public static void InstallServicesInAssembly(this IServiceCollection services, IConfiguration configuration) { var installers = typeof(Program).Assembly.ExportedTypes.Where(x =&gt; typeof(IInstaller).IsAssignableFrom(x) &amp;&amp; !x.IsInterface &amp;&amp; !x.IsAbstract) //Найти все классы реализующие IInstaller, которые не интерфейсы и не абстрактные .Select(Activator.CreateInstance) //Создать экземпляр каждого .Cast() //Привести к типу IInstaller .ToList(); //Сделать List installers.ForEach(installer =&gt; installer.InstallServices(services, configuration)); } } ``` &lt;/details&gt; ",
     "url": "/children/dotnet/amichai/amichai.html#%D0%BA%D0%BE%D0%B4",
     "relUrl": "/children/dotnet/amichai/amichai.html#код"
-  },"122": {
+  },"129": {
     "doc": "Amichai",
     "title": "Amichai",
     "content": " ",
     "url": "/children/dotnet/amichai/amichai.html",
     "relUrl": "/children/dotnet/amichai/amichai.html"
-  },"123": {
+  },"130": {
     "doc": "Interview questions",
     "title": "Interview questions",
     "content": " ",
     "url": "/children/dotnet/interview/interview.html",
     "relUrl": "/children/dotnet/interview/interview.html"
-  },"124": {
+  },"131": {
     "doc": "ASP.NET Razor Views Project",
     "title": "Developer Command Prompt for VS 2022",
     "content": "VsDevCmd.bat dotnet --help Все команды CLI dotnet dotnet run Запуск проекта . ",
     "url": "/children/dotnet/razorviews/razorviews.html#developer-command-prompt-for-vs-2022",
     "relUrl": "/children/dotnet/razorviews/razorviews.html#developer-command-prompt-for-vs-2022"
-  },"125": {
+  },"132": {
     "doc": "ASP.NET Razor Views Project",
     "title": "ASP.NET Razor Views Project",
     "content": " ",
     "url": "/children/dotnet/razorviews/razorviews.html",
     "relUrl": "/children/dotnet/razorviews/razorviews.html"
-  },"126": {
+  },"133": {
     "doc": "Richter",
     "title": "Добавить в PATH:",
     "content": "csc.exe: C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319 (Из этой директории компилятор достает MSCorLib.dll) ildasm, gacutil: C:\\Program Files (x86)\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.8 Tools . ",
     "url": "/children/dotnet/richter/richter.html#%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2-path",
     "relUrl": "/children/dotnet/richter/richter.html#добавить-в-path"
-  },"127": {
+  },"134": {
     "doc": "Richter",
     "title": "Скомпилировать один Program.cs в .exe",
     "content": "(Building Types into a Module) . csc.exe Program.cs (Выполнить в папке, где есть Program.cs) Нужно использовать в файле using System; вместо использования на компиляции /r:MSCorLib.dll /out:Program.exe /t:exe задавать вручную не нужно, это значения по умолчанию или задать параметры явно: csc.exe /out:Program.exe /t:exe /r:MSCorLib.dll Program.cs . ",
     "url": "/children/dotnet/richter/richter.html#%D1%81%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-%D0%BE%D0%B4%D0%B8%D0%BD-programcs-%D0%B2-exe",
     "relUrl": "/children/dotnet/richter/richter.html#скомпилировать-один-programcs-в-exe"
-  },"128": {
+  },"135": {
     "doc": "Richter",
     "title": "Ildasm",
     "content": "ILDasm Program.exe в папке с Program.exe Ctrl+M посмотреть метадату View/Statistics посмотреть статистику . Что такое CLR-assembly: To summarize, an assembly is a unit of reuse, versioning, and security. It allows you to partition your types and resources into separate files so that you, and consumers of your assembly, get to determine which files to package together and deploy. After the CLR loads the file containing the manifest, it can determine which of the assembly’s other files contain the types and resources the application is referencing. Anyone consuming the assembly is required to know only the name of the file containing the manifest; the file partitioning is then abstracted away from the consumer and can change in the future without breaking the application’s behavior. If you have multiple types that can share a single version number and security settings, it is recommended that you place all of the types in a single file rather than spread the types out over separate files, let alone separate assemblies. The reason is performance. Loading a file/assembly takes the CLR and Windows time to find the assembly, load it, and initialize it. The fewer files/assemblies loaded the better, because loading fewer assemblies helps reduce working set and also reduces fragmentation of a process’s address space. Finally, NGen.exe can perform better optimizations when processing larger files. ",
     "url": "/children/dotnet/richter/richter.html#ildasm",
     "relUrl": "/children/dotnet/richter/richter.html#ildasm"
-  },"129": {
+  },"136": {
     "doc": "Richter",
     "title": "Скомпилировать один Program.cs в .dll",
     "content": "В папке с FUT.cs и RUT.cs csc /out:MultiFileLibrary.dll /t:library /addmodule:RUT.netmodule FUT.cs . ",
     "url": "/children/dotnet/richter/richter.html#%D1%81%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-%D0%BE%D0%B4%D0%B8%D0%BD-programcs-%D0%B2-dll",
     "relUrl": "/children/dotnet/richter/richter.html#скомпилировать-один-programcs-в-dll"
-  },"130": {
+  },"137": {
     "doc": "Richter",
     "title": "Strongly named &amp; weakly named assemblies",
     "content": " ",
     "url": "/children/dotnet/richter/richter.html#strongly-named--weakly-named-assemblies",
     "relUrl": "/children/dotnet/richter/richter.html#strongly-named--weakly-named-assemblies"
-  },"131": {
+  },"138": {
     "doc": "Richter",
     "title": "Public Assembly Key",
     "content": " ",
     "url": "/children/dotnet/richter/richter.html#public-assembly-key",
     "relUrl": "/children/dotnet/richter/richter.html#public-assembly-key"
-  },"132": {
+  },"139": {
     "doc": "Richter",
     "title": "GAC",
     "content": "Обычно находится в %SystemRoot%\\Microsoft.NET\\Assembly GACUtil.exe для того чтобы добавлять в GAC сборки. Руками не добавлять! В GAC устанавливаются только strongly named сборки . ",
     "url": "/children/dotnet/richter/richter.html#gac",
     "relUrl": "/children/dotnet/richter/richter.html#gac"
-  },"133": {
+  },"140": {
     "doc": "Richter",
     "title": "Delay signing",
     "content": " ",
     "url": "/children/dotnet/richter/richter.html#delay-signing",
     "relUrl": "/children/dotnet/richter/richter.html#delay-signing"
-  },"134": {
+  },"141": {
     "doc": "Richter",
     "title": "Types",
     "content": "class Employee {...} идентично class Employee : System.Object {...} Все типы наследуют от System.Object, поэтому у все есть методы: Public: Equals, GetHashCode, ToString, GetType Protected: MemberwiseClone, Finalize . ",
     "url": "/children/dotnet/richter/richter.html#types",
     "relUrl": "/children/dotnet/richter/richter.html#types"
-  },"135": {
+  },"142": {
     "doc": "Richter",
     "title": "Оператор new",
     "content": ". | Вычисляет количество байт для всех филдов, которые будут в экземпляре | Аллоцирует память, присваивает нули | Инициализирует type object pointer объекта и sync block index members | Вызывает конструктора | . ",
     "url": "/children/dotnet/richter/richter.html#%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80-new",
     "relUrl": "/children/dotnet/richter/richter.html#оператор-new"
-  },"136": {
+  },"143": {
     "doc": "Richter",
     "title": "Casting через cast expression ака скобки",
     "content": ". | Object o = new Employee(); Ок | Employee e = (Employee) o; Ок | internal class Employee internal class Manager : Employee ... Object o = new DateTime(); Empoyee e = (Employee) o; . Не Ок . | . ",
     "url": "/children/dotnet/richter/richter.html#casting-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-cast-expression-%D0%B0%D0%BA%D0%B0-%D1%81%D0%BA%D0%BE%D0%B1%D0%BA%D0%B8",
     "relUrl": "/children/dotnet/richter/richter.html#casting-через-cast-expression-ака-скобки"
-  },"137": {
+  },"144": {
     "doc": "Richter",
     "title": "Операторы через is и as",
     "content": "is возвращает true если типы совместимы Всегда null для false . as присваивает ссылку на объект или null если типы несовместимы . Employee e = o as Employee; if (e != null) { // Use e within the 'if' statement. } . Разница с кастом скобками в том, что при as тип проверяется один раз. ",
     "url": "/children/dotnet/richter/richter.html#%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-is-%D0%B8-as",
     "relUrl": "/children/dotnet/richter/richter.html#операторы-через-is-и-as"
-  },"138": {
+  },"145": {
     "doc": "Richter",
     "title": "Compile time error (CTE) vs Run Time Error (RTE)",
     "content": "Страница 123 . ",
     "url": "/children/dotnet/richter/richter.html#compile-time-error-cte-vs-run-time-error-rte",
     "relUrl": "/children/dotnet/richter/richter.html#compile-time-error-cte-vs-run-time-error-rte"
-  },"139": {
+  },"146": {
     "doc": "Richter",
     "title": "Run time 127",
     "content": ". | В процессе много? тредов. | Метод ?= тред | Стек идет от high memory address к low memory address | У всех кроме самых простых методов есть prologue code и epilogue code. Стр. 103 . | Создается один процесс. В него загружается CLR. | Для каждого треда аллоцируется 1-MB стек (thread stack). | Этот стек и будет использоваться для передачи аргументов к методу и для хранения локальных переменных | Когда метод начинает выполняться, пролог-код метода аллоцирует память для для локальных переменных метода | . ",
     "url": "/children/dotnet/richter/richter.html#run-time-127",
     "relUrl": "/children/dotnet/richter/richter.html#run-time-127"
-  },"140": {
+  },"147": {
     "doc": "Richter",
     "title": "Richter",
     "content": " ",
