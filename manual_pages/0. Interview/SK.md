@@ -16,9 +16,11 @@ title: SK Вопросы
 ##### Что такое Blazor?
 ##### Как ускорить Entity Framework?
 ##### Какие уровни OSINT и на каком уровне http?
-
-
 ##### CQRS vs SQL View
+##### Что такое DispatchProxy
+
+##### ToArray() vs ToList()
+
 
 ##### DDD vs Anemic
 [Ссылка](https://www.youtube.com/watch?v=pFlvQ97nIGs&list=PLIB8be7sunXNsWzOg4GyAnw8BnezVE3Mq&index=49)
